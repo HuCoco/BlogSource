@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Breadth First Search | HuCoco</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Breadth First Search Chinese version address Breadth First SearchOverviewThe breadth first search algorithm, also known as “width first search” or “horizontal priority search”, is called BFS. From a v">
+<meta name="keywords" content="C++,Graph,Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Breadth First Search">
+<meta property="og:url" content="http://HuCoco.com/2018/03/07/Breadth-First-Search/index.html">
+<meta property="og:site_name" content="HuCoco">
+<meta property="og:description" content="Breadth First Search Chinese version address Breadth First SearchOverviewThe breadth first search algorithm, also known as “width first search” or “horizontal priority search”, is called BFS. From a v">
+<meta property="og:image" content="http://hucoco.com/img/Graph/DGBFS.png">
+<meta property="og:updated_time" content="2018-03-07T16:04:30.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Breadth First Search">
+<meta name="twitter:description" content="Breadth First Search Chinese version address Breadth First SearchOverviewThe breadth first search algorithm, also known as “width first search” or “horizontal priority search”, is called BFS. From a v">
+<meta name="twitter:image" content="http://hucoco.com/img/Graph/DGBFS.png">
+    
+
+    
+        <link rel="alternate" href="/" title="HuCoco" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">HuCoco</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Hu Ke</h2>
+            <h3 id="title">Game Engine Researcher &amp; C++ Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                9
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/HuCoco/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Breadth-First-Search" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Breadth First Search
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/03/07/Breadth-First-Search/">
+            <time datetime="2018-03-07T15:18:11.000Z" itemprop="datePublished">2018-03-07</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">457</span>&nbsp;|&nbsp;Time: <span class="post-count">3</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Search/">Search</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Algorithm/">Algorithm</a>, <a class="tag-link" href="/tags/C/">C++</a>, <a class="tag-link" href="/tags/Graph/">Graph</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><a href="http://hucoco.coding.me/2016/11/22/Graph/BFS/" target="_blank" rel="noopener">Breadth First Search Chinese version address</a></p>
+<h1 id="Breadth-First-Search"><a href="#Breadth-First-Search" class="headerlink" title="Breadth First Search"></a>Breadth First Search</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>The breadth first search algorithm, also known as “width first search” or “horizontal priority search”, is called BFS.</p>
+<p>From a vertex in the graph, each of the not visited adjacent points of the V is accessed in turn after accessing the starting vertex, then the adjacency points are accessed in turn from these adjacent points, and the adjacent points of the vertex to be accessed are accessed before the adjacent points of the vertices that are accessed, until all the adjacent points of the vertices are accessed. If the vertices are not accessed at this time, we need to select another vertex which has never been visited as a new starting point, repeat the above process until all the vertices in the graph are accessed.</p>
+<p>In other words, the process of breadth first search is the starting point and from near to far, access to the path and the path length of the starting vertex and the path length of 1,2…</p>
+<h2 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h2><h3 id="Breadth-first-search-for-undirected-graphs"><a href="#Breadth-first-search-for-undirected-graphs" class="headerlink" title="Breadth first search for undirected graphs"></a>Breadth first search for undirected graphs</h3><p>The following is an example of undirected graph, to demonstrate the depth-first search.</p>
+<p><img src="http://hucoco.com/img/Graph/UDG.png" alt="Undirected Graphs"></p>
+<a id="more"></a>
+<p>Breadth first search of the graph above, starting with vertex A:</p>
+<p><img src="http://hucoco.com/img/Graph/UDGBFS.png" alt="Step Diagram"></p>
+<h4 id="Steps"><a href="#Steps" class="headerlink" title="Steps:"></a>Steps:</h4><ol>
+<li>Access to A.</li>
+<li>Access C, D, F in turn. After visiting A, next visit A’s adjoining point. the vertices A,B,C,D,E,F,G are stored in order, so first visit C, after visiting C, next to visit D and F.</li>
+<li>Access B, G, in turn. After C, D, and F are accessed in the second step, then their adjacency points are accessed in turn. Next first access the adjacency point B of C, and then access the adjacency point G of the F.</li>
+<li>Access to E. After accessing B and G in the third step, the adjacent points are accessed in turn. Only G has a adjacency point E, so access to the adjacency point E of the G.</li>
+</ol>
+<h4 id="C-Implememtation"><a href="#C-Implememtation" class="headerlink" title="C++ Implememtation"></a>C++ Implememtation</h4><h5 id="Adjacency-Matrix-Version"><a href="#Adjacency-Matrix-Version" class="headerlink" title="Adjacency Matrix Version"></a>Adjacency Matrix Version</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// Work in progress</span><br></pre></td></tr></table></figure>
+<h5 id="Adjacency-List-Version"><a href="#Adjacency-List-Version" class="headerlink" title="Adjacency List Version"></a>Adjacency List Version</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// Work in progress</span><br></pre></td></tr></table></figure>
+<h3 id="Breadth-first-search-for-undirected-graphs-1"><a href="#Breadth-first-search-for-undirected-graphs-1" class="headerlink" title="Breadth first search for undirected graphs"></a>Breadth first search for undirected graphs</h3><p>The following is an example of directed graph, to demonstrate the Breadth first search.</p>
+<p><img src="http://hucoco.com/img/Graph/DG.png" alt="Directed Graphs"></p>
+<!--more-->
+<p>Breadth first search of the graph above, starting with vertex A:</p>
+<p><img src="http://hucoco.com/img/Graph/DGBFS.png" alt="Step Diagram"></p>
+<h4 id="Steps-1"><a href="#Steps-1" class="headerlink" title="Steps:"></a>Steps:</h4><ol>
+<li>Access to A.</li>
+<li>Access to B.</li>
+<li>Access C, E, F in turn. After accessing the B, next to the other vertex of the B’s out-edge, that is, C, E, and F.</li>
+<li>Access D, G in turn. After accessing C, E, and F, the other vertices of the out-edge of their are accessed in turn.</li>
+</ol>
+<h4 id="C-Implememtation-1"><a href="#C-Implememtation-1" class="headerlink" title="C++ Implememtation"></a>C++ Implememtation</h4><h5 id="Adjacency-Matrix-Version-1"><a href="#Adjacency-Matrix-Version-1" class="headerlink" title="Adjacency Matrix Version"></a>Adjacency Matrix Version</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// Work in progress</span><br></pre></td></tr></table></figure>
+<h5 id="Adjacency-List-Version-1"><a href="#Adjacency-List-Version-1" class="headerlink" title="Adjacency List Version"></a>Adjacency List Version</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// Work in progress</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/03/07/Breadth-First-Search/" data-id="cjeii6k1p0007iob9yum1meni" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/03/08/Topological-Sort/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Topological Sort
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/03/07/Depth-First-Search/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Depth First Search</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/08/Topological-Sort/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graph/Topological%20Order.png)" alt="Topological Sort" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Sort/">Sort</a></p>
+                            <p class="item-title"><a href="/2018/03/08/Topological-Sort/" class="title">Topological Sort</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T12:14:15.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/Breadth-First-Search/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graph/DGBFS.png)" alt="Breadth First Search" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Search/">Search</a></p>
+                            <p class="item-title"><a href="/2018/03/07/Breadth-First-Search/" class="title">Breadth First Search</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T15:18:11.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/07/Depth-First-Search/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graph/DGDFS.png)" alt="Depth First Search" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Search/">Search</a></p>
+                            <p class="item-title"><a href="/2018/03/07/Depth-First-Search/" class="title">Depth First Search</a></p>
+                            <p class="item-date"><time datetime="2018-03-07T14:47:44.000Z" itemprop="datePublished">2018-03-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/06/Adjacency-List-Graph/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graph/UDG.png)" alt="Adjacency List Graph" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Structure/">Data Structure</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Structure/Graph/">Graph</a></p>
+                            <p class="item-title"><a href="/2018/03/06/Adjacency-List-Graph/" class="title">Adjacency List Graph</a></p>
+                            <p class="item-date"><time datetime="2018-03-05T16:40:11.000Z" itemprop="datePublished">2018-03-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/06/Adjacency-Matrix-Graph/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graph/UDG.png)" alt="Adjacency Matrix Graph" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Structure/">Data Structure</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Structure/Graph/">Graph</a></p>
+                            <p class="item-title"><a href="/2018/03/06/Adjacency-Matrix-Graph/" class="title">Adjacency Matrix Graph</a></p>
+                            <p class="item-date"><time datetime="2018-03-05T16:40:02.000Z" itemprop="datePublished">2018-03-06</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 15px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 15px;">Graph</a> <a href="/tags/Tree/" style="font-size: 10px;">Tree</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div class="outer">	
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hu Ke<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">5.8k</span>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
