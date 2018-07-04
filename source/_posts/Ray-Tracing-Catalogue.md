@@ -12,7 +12,7 @@ categories:
 
 This is catalogue of Ray Tracing, I will update it if I have free time.(It's means I don't know what time I will finish one of them.)
  
-:)
+![](http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)
 
 * Theory of ray tracing
 * Ray tracing world

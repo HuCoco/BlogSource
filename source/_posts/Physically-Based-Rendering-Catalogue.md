@@ -11,7 +11,7 @@ categories:
 ---
 This is catalogue of Physically Based Rendering, I will update it if I have free time.(It's means I don't know what time I will finish one of them.)
  
-:)
+![](http://hucoco.com/img/Graphics/PBR/PBR_0.png)
 
 * Theory of Physically Based Rendering
 * The microfacet model
