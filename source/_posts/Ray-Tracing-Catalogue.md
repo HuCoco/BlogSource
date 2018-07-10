@@ -15,8 +15,9 @@ This is catalogue of Ray Tracing, I will update it if I have free time.(It's mea
 ![](http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)
 
 * Theory of ray tracing
-* Ray tracing world
+* Ray, Scene and Camera
 * Various surfaces
+* Materials
 * Do ray tracing
 * Shadow
 * Reflection

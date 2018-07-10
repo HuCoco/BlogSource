@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Various surfaces | HuCoco</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Ray-Plane IntersectionPlane is often represented in implicit form : Ax + By + Cz + D = 0Equivalent: N \cdot P + D = 0where $N = [A B C]^T$ and $P = [x y z]^T$ To find ray-plane intersection, substitut">
+<meta name="keywords" content="Graphics,Ray Tracing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Various surfaces">
+<meta property="og:url" content="http://HuCoco.com/2018/07/06/Various-surfaces/index.html">
+<meta property="og:site_name" content="HuCoco">
+<meta property="og:description" content="Ray-Plane IntersectionPlane is often represented in implicit form : Ax + By + Cz + D = 0Equivalent: N \cdot P + D = 0where $N = [A B C]^T$ and $P = [x y z]^T$ To find ray-plane intersection, substitut">
+<meta property="og:image" content="http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png">
+<meta property="og:updated_time" content="2018-07-07T08:33:09.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Various surfaces">
+<meta name="twitter:description" content="Ray-Plane IntersectionPlane is often represented in implicit form : Ax + By + Cz + D = 0Equivalent: N \cdot P + D = 0where $N = [A B C]^T$ and $P = [x y z]^T$ To find ray-plane intersection, substitut">
+<meta name="twitter:image" content="http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png">
+    
+
+    
+        <link rel="alternate" href="/" title="HuCoco" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">HuCoco</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">Hu Ke</h2>
+            <h3 id="title">C++ Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                13
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/HuCoco/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Various-surfaces" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Various surfaces
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/06/Various-surfaces/">
+            <time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">1,133</span>&nbsp;|&nbsp;Time: <span class="post-count">7</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/Ray-Tracing/">Ray Tracing</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="Ray-Plane-Intersection"><a href="#Ray-Plane-Intersection" class="headerlink" title="Ray-Plane Intersection"></a>Ray-Plane Intersection</h2><p>Plane is often represented in implicit form :</p>
+<script type="math/tex; mode=display">Ax + By + Cz + D = 0</script><p>Equivalent:</p>
+<script type="math/tex; mode=display">N \cdot P + D = 0</script><p>where $N = [A B C]^T$ and $P = [x y z]^T$</p>
+<p>To find ray-plane intersection, substitute ray equation $P(t)$ into plane equation:</p>
+<ol>
+<li>We get $N \cdot P + D = 0$.</li>
+<li>Sovle for $t$ to get $t_0$.</li>
+<li>if $t_0$ is infinity, no intersection (ray is parallel to plane).</li>
+<li>Intersection point is $P(t_0)$.</li>
+<li>Verify that intersection is not behind ray origin.</li>
+</ol>
+<p>The normal at the intersection is $N$ (or $-N$)</p>
+<a id="more"></a>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Plane::hit( <span class="keyword">const</span> Ray &amp;r, <span class="keyword">double</span> tmin, <span class="keyword">double</span> tmax, SurfaceHitRecord &amp;rec ) <span class="keyword">const</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="function">Vector3d <span class="title">N</span><span class="params">( A, B, C )</span></span>;</span><br><span class="line">	<span class="keyword">double</span> NRd = dot( N, r.direction() );</span><br><span class="line">	<span class="keyword">double</span> NRo = dot( N, r.origin() );</span><br><span class="line">	<span class="keyword">double</span> t = (-D - NRo) / NRd;</span><br><span class="line">	<span class="keyword">if</span> ( t &lt; tmin || t &gt; tmax ) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rec.t = t;</span><br><span class="line">	rec.p = r.pointAtParam(t);</span><br><span class="line">	rec.normal = N;</span><br><span class="line">	rec.mat_ptr = matp;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Ray-Sphere-Intersection"><a href="#Ray-Sphere-Intersection" class="headerlink" title="Ray-Sphere Intersection"></a>Ray-Sphere Intersection</h2><p>Sphere (centered at origin) is often represented in implicit form:</p>
+<script type="math/tex; mode=display">x^2 + y^2 + z^2 - r^2 = 0</script><p>Equivalent:</p>
+<script type="math/tex; mode=display">P \cdot P - r^2 = 0</script><p>To find ray-plane intersection, substitute ray equation P(t) into plane equation:</p>
+<p>We get $P \cdot P - r^2 = 0$:</p>
+<script type="math/tex; mode=display">P(t) \cdot P(t) - r^2 = 0</script><script type="math/tex; mode=display">(R_o + tR_d) \cdot (R_o + tR_d) - r^2 = 0</script><script type="math/tex; mode=display">R_d \cdot R_dt^2 + 2R_d \cdot R_o + R_o \cdot R_o - r^2 = 0</script><p>$R_o$ is ray origin, $R_d$ is ray direction.</p>
+<p>It is a quadratic equation in the form $at^2 + bt + c = 0$</p>
+<ul>
+<li>$a = R_o \cdot R_o = 1$ (Since $|R_d| = 1$)</li>
+<li>$b = 2R_d \cdot R_o$</li>
+<li>$c = R_o \cdot R_o - r^2$</li>
+</ul>
+<p>Discriminant: $d = b^2 + 4ac$</p>
+<p>Solution: $t_\pm = \frac{-b\pm\sqrt{b^2 + 4ac}}{2a}$</p>
+<p>Choose $t_0$ as the closest positive $t$ value ($t_+$ + or $t_-$)</p>
+<p>The normal at the intersection point is $P(t_0)/|P(t_0)|$</p>
+<p>Very easy to compute, that is why most ray tracing images have spheres.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Sphere::hit( <span class="keyword">const</span> Ray &amp;r, <span class="keyword">double</span> tmin, <span class="keyword">double</span> tmax, SurfaceHitRecord &amp;rec ) <span class="keyword">const</span> </span><br><span class="line">&#123;</span><br><span class="line">    Vector3d Rd = r.direction();</span><br><span class="line">    Vector3d Ro = r.origin() - center;</span><br><span class="line">    <span class="keyword">double</span> a = dot(Rd,Rd);</span><br><span class="line">    <span class="keyword">double</span> b = <span class="number">2.0</span> * dot(Rd, Ro);</span><br><span class="line">    <span class="keyword">double</span> c = dot(Ro,Ro) - <span class="built_in">pow</span>(radius, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">double</span> d = <span class="built_in">pow</span>(b, <span class="number">2</span>) - <span class="number">4.0</span> * a * c;</span><br><span class="line">    <span class="keyword">if</span>(d &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> t = (-b - <span class="built_in">sqrt</span>(d)) / (<span class="number">2.0f</span> * a);</span><br><span class="line">    <span class="keyword">if</span> ( t &gt;= tmin &amp;&amp; t &lt;= tmax )</span><br><span class="line">    &#123;</span><br><span class="line">        rec.t = t ;</span><br><span class="line">        rec.p = r.pointAtParam(t);</span><br><span class="line">        rec.normal = (Ro + t * Rd) / radius;</span><br><span class="line">        rec.mat_ptr = matp;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Ray-Box-Intersection"><a href="#Ray-Box-Intersection" class="headerlink" title="Ray-Box Intersection"></a>Ray-Box Intersection</h2><p>To find ray-box intersection:</p>
+<ul>
+<li>For each pair of parallel plane, find the distance to the first plane ($t_{near}$) and to the second plane ($t_{far}$).</li>
+<li>Keep the largest $t_{near}$ so far, and smallest $t_{far}$ so far.</li>
+<li>If largest $t_{near}$ &gt; smallest $t_{far}$ , no intersection.</li>
+<li>Otherwise, the intersection is at P(largest $t_{near}$ )</li>
+</ul>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/Ray_box_Intersection_00.png" alt=""></p>
+<h2 id="Ray-Triangle-Intersection"><a href="#Ray-Triangle-Intersection" class="headerlink" title="Ray-Triangle Intersection"></a>Ray-Triangle Intersection</h2><p>Finding intersection between a ray and a general polygon is difficult.</p>
+<ul>
+<li>Compute ray-plane intersection</li>
+<li>Determine whether intersection is within polygon<ul>
+<li>Tedious for non-convex polygon</li>
+</ul>
+</li>
+<li>Interpolation of attributes at the vertices are not well-<br>defined</li>
+</ul>
+<p>Much easier to find ray-triangle intersection</p>
+<ul>
+<li>Can use the <strong>barycentric coordinates</strong> method.</li>
+<li>Interpolation of attributes at the vertices are well-defined using the barycentric coordinates.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Triangle::hit( <span class="keyword">const</span> Ray &amp;r, <span class="keyword">double</span> tmin, <span class="keyword">double</span> tmax, SurfaceHitRecord &amp;rec ) <span class="keyword">const</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">double</span> A = v0.x() - v1.x();</span><br><span class="line">	<span class="keyword">double</span> B = v0.y() - v1.y();</span><br><span class="line">	<span class="keyword">double</span> C = v0.z() - v1.z();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> D = v0.x() - v2.x();</span><br><span class="line">	<span class="keyword">double</span> E = v0.y() - v2.y();</span><br><span class="line">	<span class="keyword">double</span> F = v0.z() - v2.z();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> G = r.direction().x();</span><br><span class="line">	<span class="keyword">double</span> H = r.direction().y();</span><br><span class="line">	<span class="keyword">double</span> I = r.direction().z();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> J = v0.x() - r.origin().x();</span><br><span class="line">	<span class="keyword">double</span> K = v0.y() - r.origin().y();</span><br><span class="line">	<span class="keyword">double</span> L = v0.z() - r.origin().z();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> EIHF = E*I - H*F;</span><br><span class="line">	<span class="keyword">double</span> GFDI = G*F - D*I;</span><br><span class="line">	<span class="keyword">double</span> DHEG = D*H - E*G;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> denom = (A*EIHF + B*GFDI + C*DHEG);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> beta = (J*EIHF + K*GFDI + L*DHEG) / denom;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( beta &lt; <span class="number">0.0</span> || beta &gt; <span class="number">1.0</span> ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> AKJB = A*K - J*B;</span><br><span class="line">	<span class="keyword">double</span> JCAL = J*C - A*L;</span><br><span class="line">	<span class="keyword">double</span> BLKC = B*L - K*C;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> gamma = (I*AKJB + H*JCAL + G*BLKC) / denom;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( gamma &lt; <span class="number">0.0</span> || beta + gamma &gt; <span class="number">1.0</span> ) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> t = -(F*AKJB + E*JCAL + D*BLKC) / denom;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( t &gt;= tmin &amp;&amp; t &lt;= tmax )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// We have a hit -- populat hit record. </span></span><br><span class="line">		rec.t = t;</span><br><span class="line">		rec.p = r.pointAtParam(t);</span><br><span class="line">		<span class="keyword">double</span> alpha = <span class="number">1.0</span> - beta - gamma;</span><br><span class="line">		rec.normal = alpha * n0 + beta * n1 + gamma * n2;</span><br><span class="line">		rec.mat_ptr = matp;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Barycentric-Coordinates"><a href="#Barycentric-Coordinates" class="headerlink" title="Barycentric Coordinates"></a>Barycentric Coordinates</h3><p>The barycentric coordinates of a point P on a triangle $ABC$ is ($ \alpha $, $ \beta $, $ \gamma $) such that:</p>
+<script type="math/tex; mode=display">P = \alpha A + \beta B + \gamma C</script><p>where</p>
+<script type="math/tex; mode=display">\alpha + \beta + \gamma = 1</script><p>and </p>
+<script type="math/tex; mode=display">0 \leq \alpha,\beta,\gamma \leq 1</script><p>We can rewrite it as:</p>
+<script type="math/tex; mode=display">P = (1 - \beta - \gamma)A + \beta B + \gamma C</script><script type="math/tex; mode=display">P = A + \beta(B-A) + \gamma(C-A)</script><p><img src="http://hucoco.com/img/Graphics/RayTracing/Ray_triangle_Intersection_00.png" alt=""></p>
+<p>To find ray-triangle intersection, we let:</p>
+<script type="math/tex; mode=display">P(t) = A + \beta(B-A) + \gamma(C-A)</script><script type="math/tex; mode=display">R_o + tR_d = A + \beta(B-A) + \gamma(C-A)</script><p>Solve for $t$, $\beta$ and $\gamma$</p>
+<p>Intersection if $\beta + \gamma &lt; 1$ and $\beta,\gamma &gt; 0$ and $t &gt; 0$</p>
+<p>Expand &amp;R_o + tR_d = A + \beta(B-A) + \gamma(C-A)&amp;</p>
+<script type="math/tex; mode=display">\begin{cases}
+R_{ox} + tR_{dx} = A_x + \beta(B_x-A_x) + \gamma(C_x + A_x) \\
+R_{oy} + tR_{dy} = A_y + \beta(B_y-A_y) + \gamma(C_y + A_y) \\
+R_{oz} + tR_{dz} = A_z + \beta(B_z-A_z) + \gamma(C_z + A_z) \\
+\end{cases}</script><p>we have 3 equations and 3 unknowns here.</p>
+<p>Regroup and write in matrix form</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+A_x - B_x &A_x - C_x &R_{dx}\\ 
+A_y - B_y &A_y - C_y &R_{dy}\\ 
+A_z - B_z &A_z - C_z &R_{dz}
+\end{bmatrix}
+\begin{bmatrix}
+\beta \\
+\gamma \\
+t
+\end{bmatrix}
+=
+\begin{bmatrix}
+A_x - R_{ox} \\
+A_y - R_{oy} \\
+A_z - R_{oz}
+\end{bmatrix}</script><p>Use Cramer’s Rule to solve for $t$, $\beta$ and $\gamma$</p>
+<script type="math/tex; mode=display">
+\beta = 
+\frac
+{
+\begin{vmatrix}
+A_x - R_{ox} &A_x-C_x &R_{dx} \\
+A_y - R_{oy} &A_y-C_y &R_{dy} \\
+A_z - R_{oz} &A_z-C_z &R_{dz} 
+\end{vmatrix}
+}
+{
+|A|
+}</script><script type="math/tex; mode=display">
+\gamma = 
+\frac
+{
+\begin{vmatrix}
+A_x - B_{x} &A_x-R_{ox} &R_{dx} \\
+A_y - B_{y} &A_y-R_{oy} &R_{dy} \\
+A_z - B_{z} &A_z-R_{oz} &R_{dz} 
+\end{vmatrix}
+}
+{
+|A|
+}</script><script type="math/tex; mode=display">
+t= 
+\frac
+{
+\begin{vmatrix}
+A_x - B_{x} &A_x - C_{x} &A_x-R_{ox}  \\
+A_y - B_{y} &A_x - C_{x} &A_y-R_{oy}  \\
+A_z - B_{z} &A_x - C_{x} &A_z-R_{oz} 
+\end{vmatrix}
+}
+{
+|A|
+}</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Triangle::hit( <span class="keyword">const</span> Ray &amp;r, <span class="keyword">double</span> tmin, <span class="keyword">double</span> tmax, SurfaceHitRecord &amp;rec ) <span class="keyword">const</span> </span><br><span class="line">&#123;	</span><br><span class="line">    Vector3d e1 = v1 - v0;</span><br><span class="line">	Vector3d e2 = v2 - v0;</span><br><span class="line">	Vector3d p = cross( r.direction(), e2 );	</span><br><span class="line">	<span class="keyword">double</span> a = dot( e1, p );</span><br><span class="line">    <span class="keyword">double</span> f = <span class="number">1.0</span> / a;</span><br><span class="line">	Vector3d s = r.origin() - v0;</span><br><span class="line">	<span class="keyword">double</span> beta = f * dot( s, p );</span><br><span class="line">    <span class="keyword">if</span> ( beta &lt; <span class="number">0.0</span> || beta &gt; <span class="number">1.0</span> ) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Vector3d q = cross( s, e1 );</span><br><span class="line">    <span class="keyword">double</span> gamma = f * dot( r.direction(), q );</span><br><span class="line">    <span class="keyword">if</span> ( gamma &lt; <span class="number">0.0</span> || beta + gamma &gt; <span class="number">1.0</span> ) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> t = f * dot( e2, q );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( t &gt;= tmin &amp;&amp; t &lt;= tmax )</span><br><span class="line">	&#123;</span><br><span class="line">		rec.t = t;</span><br><span class="line">		rec.p = r.pointAtParam(t);</span><br><span class="line">		<span class="keyword">double</span> alpha = <span class="number">1.0</span> - beta - gamma;</span><br><span class="line">		rec.normal = alpha * n0 + beta * n1 + gamma * n2;</span><br><span class="line">		rec.mat_ptr = matp;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Advantages-of-Barycentric-Intersection"><a href="#Advantages-of-Barycentric-Intersection" class="headerlink" title="Advantages of Barycentric Intersection"></a>Advantages of Barycentric Intersection</h3><ul>
+<li>Efficient</li>
+<li>No need to store plane equation</li>
+<li>Barycentric coordinates are useful for linear interpolation of normal vectors, texture coordinates, and other attributes at the vertices</li>
+</ul>
+<p>For example, the interpolated normal at $P$ is:</p>
+<script type="math/tex; mode=display">N_p = (1 - \beta - \gamma)N_A + \beta N_B + \gamma N_C</script><p>and all vector should do a normalization.</p>
+<h2 id="The-“Epsilon”-Problem"><a href="#The-“Epsilon”-Problem" class="headerlink" title="The “Epsilon” Problem"></a>The “Epsilon” Problem</h2><p>Should not accept intersection for very small positive $t$</p>
+<ul>
+<li>May falsely intersect the surface at the ray origin</li>
+<li><strong>Method 1:</strong> Use an epsilon value $\varepsilon$ &gt; 0, and accept an intersection only if its $t &gt; \varepsilon$.</li>
+<li><strong>Method 2:</strong> When a new ray is spawned, advanced the ray origin by an epsilon distance $\varepsilon$ in the ray direction</li>
+</ul>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/epslion_problem_00.png" alt=""><br><img src="http://hucoco.com/img/Graphics/RayTracing/epslion_problem_01.png" alt=""></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/06/Various-surfaces/" data-id="cjjfc3ngw0014nsb9cowb2tlg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/07/07/Ray-and-Camera/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Ray and Camera
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/07/05/Theory-of-Ray-Tracing/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Ray Tracing Overview</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/Do-Ray-Tracing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/DoRayTracing_01.png)" alt="Do Ray Tracing" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Do-Ray-Tracing/" class="title">Do Ray Tracing</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T05:54:10.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/09/Lighting_and_Materials/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png)" alt="Lighting and Materials" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/09/Lighting_and_Materials/" class="title">Lighting and Materials</a></p>
+                            <p class="item-date"><time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/07/Ray-and-Camera/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/ray_00.png)" alt="Ray and Camera" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/07/Ray-and-Camera/" class="title">Ray and Camera</a></p>
+                            <p class="item-date"><time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/06/Various-surfaces/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Various surfaces" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/06/Various-surfaces/" class="title">Various surfaces</a></p>
+                            <p class="item-date"><time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/05/Theory-of-Ray-Tracing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Ray Tracing Overview" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Ray Tracing Overview</a></p>
+                            <p class="item-date"><time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 12px;">Tree</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div class="outer">	
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hu Ke<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">10.4k</span>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

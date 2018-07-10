@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Lighting and Materials | HuCoco</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="LightingCaculate lighting effect is extremely complicated and it depends on way too many factors in real world, therefore we use a method based on approximations of reality using simplified models tha">
+<meta name="keywords" content="Graphics,Ray Tracing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lighting and Materials">
+<meta property="og:url" content="http://HuCoco.com/2018/07/09/Materials/index.html">
+<meta property="og:site_name" content="HuCoco">
+<meta property="og:description" content="LightingCaculate lighting effect is extremely complicated and it depends on way too many factors in real world, therefore we use a method based on approximations of reality using simplified models tha">
+<meta property="og:image" content="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png">
+<meta property="og:updated_time" content="2018-07-09T14:31:24.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lighting and Materials">
+<meta name="twitter:description" content="LightingCaculate lighting effect is extremely complicated and it depends on way too many factors in real world, therefore we use a method based on approximations of reality using simplified models tha">
+<meta name="twitter:image" content="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png">
+    
+
+    
+        <link rel="alternate" href="/" title="HuCoco" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">HuCoco</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Cari" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Tulis Sesuatu.." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Pos',
+            PAGES: 'Halaman',
+            CATEGORIES: 'Kategori',
+            TAGS: 'Tag',
+            UNTITLED: 'Tanpa Judul',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Cari" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">Hu Ke</h2>
+            <h3 id="title">C++ Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">IKUTI</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                18
+                <span>pos</span>
+            </div>
+            <div class="article-info-block">
+                13
+                <span>tag</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/HuCoco/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Materials" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Lighting and Materials
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/09/Materials/">
+            <time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">595</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/Ray-Tracing/">Ray Tracing</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="Lighting"><a href="#Lighting" class="headerlink" title="Lighting"></a>Lighting</h2><p>Caculate lighting effect is extremely complicated and it depends on way too many factors in real world, therefore we use a method based on approximations of reality using simplified models that are much easier to process and look relatively similar. These lighting models are based on the physics of light as we understand it. One of those models is called the <strong>Phong lighting model</strong>. </p>
+<p>Phong lighting is a great and very efficient approximation of lighting, but its specular reflections break down in certain conditions, specifically when the shininess property is low resulting in a large (rough) specular area.</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_01.png" alt=""></p>
+<p>In 1977 the <strong>Blinn-Phong lighting model</strong> was introduced by James F. Blinn as an extension to the Phong shading we’ve used so far. The Blinn-Phong model is largely similar, but approaches the specular model slightly different which as a result overcomes our problem. Instead of relying on a reflection vector we’re using a so called halfway vector that is a unit vector exactly halfway between the view direction and the light direction. The closer this halfway vector aligns with the surface’s normal vector, the higher the specular contribution.</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_02.png" alt=""></p>
+<p>Getting the halfway vector is easy, we add the light’s direction vector and view vector together and normalize the result:</p>
+<script type="math/tex; mode=display">
+\overline{H} = \frac{\overline{V} + \overline{H}}
+{\begin{Vmatrix}
+\overline{V} + \overline{H}
+\end{Vmatrix}}</script><h2 id="Matrials"><a href="#Matrials" class="headerlink" title="Matrials"></a>Matrials</h2><p>The major building blocks of the Phong model consist of 3 components: ambient, diffuse and specular lighting. Below you can see what these lighting components actually look like:</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png" alt=""></p>
+<ul>
+<li><strong>Ambient lighting:</strong> even when it is dark there is usually still some light somewhere in the world (the moon, a distant light) so objects are almost never completely dark. To simulate this we use an ambient lighting constant that always gives the object some color.</li>
+<li><p><strong>Diffuse lighting:</strong> simulates the directional impact a light object has on an object. This is the most visually significant component of the lighting model. The more a part of an object faces the light source, the brighter it becomes.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptLight.I_source * mat-&gt;k_d * NL</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>Specular lighting:</strong> simulates the bright spot of a light that appears on shiny objects. Specular highlights are often more inclined to the color of the light than the color of the object.</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">float RVn = pow( (float) dot( V, R ), (float) mat-&gt;n);  \\Phong lighting model</span><br><span class="line">float RVn = pow( (float) dot( N, H ), (float) mat-&gt;n);  \\Blinn-Phong lighting model</span><br><span class="line">ptLight.I_source * mat-&gt;k_r * RVn);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Phong-lighting-model"><a href="#Phong-lighting-model" class="headerlink" title="Phong lighting model"></a>Phong lighting model</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> Color <span class="title">computePhongLighting</span><span class="params">( <span class="keyword">const</span> Vector3d &amp;L, <span class="keyword">const</span> Vector3d &amp;N, <span class="keyword">const</span> Vector3d &amp;V,</span></span></span><br><span class="line"><span class="function"><span class="params">								   <span class="keyword">const</span> EMPMaterial* mat, <span class="keyword">const</span> PointLightSource &amp;ptLight )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Vector3d NN = ( dot( L, N ) &gt;= <span class="number">0.0</span> )?  N : -N;</span><br><span class="line"></span><br><span class="line">	Vector3d R = mirrorReflect( L, NN );</span><br><span class="line">	<span class="keyword">float</span> NL = (<span class="keyword">float</span>) dot( NN, L );</span><br><span class="line">	<span class="keyword">float</span> RVn = <span class="built_in">pow</span>( (<span class="keyword">float</span>) dot( V, R ), (<span class="keyword">float</span>) mat-&gt;n );</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ptLight.I_source * ( mat-&gt;k_d * NL  +  mat-&gt;k_r * RVn );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Blinn-Phong-lighting-model"><a href="#Blinn-Phong-lighting-model" class="headerlink" title="Blinn-Phong lighting model"></a>Blinn-Phong lighting model</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> Color <span class="title">computeBlinnPhongLighting</span><span class="params">(<span class="keyword">const</span> Vector3d &amp;L, <span class="keyword">const</span> Vector3d &amp;N, <span class="keyword">const</span> Vector3d &amp;V,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> EMPMaterial* mat, <span class="keyword">const</span> PointLightSource &amp;ptLight)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Vector3d NN = (dot(L, N) &gt;= <span class="number">0.0</span>) ? N : -N;</span><br><span class="line"></span><br><span class="line">    Vector3d R = mirrorReflect(L, NN);</span><br><span class="line">    Vector3d H = L + V;</span><br><span class="line">    H = H.makeUnitVector();</span><br><span class="line">    <span class="keyword">float</span> NL = (<span class="keyword">float</span>)dot(NN, L);</span><br><span class="line">    <span class="keyword">float</span> RVn = <span class="built_in">pow</span>((<span class="keyword">float</span>)dot(N, H), (<span class="keyword">float</span>)mat-&gt;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ptLight.I_source * (mat-&gt;k_d * NL + mat-&gt;k_r * RVn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>those lighting models are experience model, it is not base on physically visual effect. </p>
+<p>physically based rendering is a collection of render techniques, these techniques will be introduced in other series of articles. </p>
+<p><a href="http://hucoco.com/2018/07/04/Physically-Based-Rendering-Catalogue/">Physically Based Rendering Series Catalogue</a>, and  the series is in progress.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/09/Materials/" data-id="cjjed7hzb0004lgb9922b4bfz" class="article-share-link"><i class="fa fa-share"></i>Bagikan</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/07/07/Ray-and-Camera/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Lebih lama</strong>
+            <div class="article-nav-title">Ray and Camera</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Terbaru</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/09/Materials/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png)" alt="Lighting and Materials" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/09/Materials/" class="title">Lighting and Materials</a></p>
+                            <p class="item-date"><time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/07/Ray-and-Camera/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/ray_00.png)" alt="Ray and Camera" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/07/Ray-and-Camera/" class="title">Ray and Camera</a></p>
+                            <p class="item-date"><time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/06/Various-surfaces/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Various surfaces" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/06/Various-surfaces/" class="title">Various surfaces</a></p>
+                            <p class="item-date"><time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/05/Theory-of-Ray-Tracing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Ray Tracing Overview" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Ray Tracing Overview</a></p>
+                            <p class="item-date"><time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/04/Physically-Based-Rendering-Catalogue/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/PBR_0.png)" alt="Physically Based Rendering Catalogue" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/04/Physically-Based-Rendering-Catalogue/" class="title">Physically Based Rendering Catalogue</a></p>
+                            <p class="item-date"><time datetime="2018-07-04T13:57:47.000Z" itemprop="datePublished">2018-07-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Kategori</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">Arsip</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">awan tag</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 17.5px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 17.5px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 17.5px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 15px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 12.5px;">Tree</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tautan</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div class="outer">	
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hu Ke<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">9.5k</span>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

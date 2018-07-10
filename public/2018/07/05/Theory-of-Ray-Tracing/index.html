@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Theory of Ray Tracing | HuCoco</title>
+    <title>Ray Tracing Overview | HuCoco</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="$J \left ( \theta\right )= \frac{1}{2m}\sum_{i=1}^{m}\left ( h_{\theta }\left ( x^{\left ( i \right )} \right )-y^{\left ( i \right )} \right )^{2}$">
+    <meta name="description" content="Overview In 3D compute graphics, ray tracing is rendering technique for generating an visual image by tracing the path of light. it has better effect than either ray casting and scan-line rendering te">
 <meta name="keywords" content="Graphics,Ray Tracing">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Theory of Ray Tracing">
+<meta property="og:title" content="Ray Tracing Overview">
 <meta property="og:url" content="http://HuCoco.com/2018/07/05/Theory-of-Ray-Tracing/index.html">
 <meta property="og:site_name" content="HuCoco">
-<meta property="og:description" content="$J \left ( \theta\right )= \frac{1}{2m}\sum_{i=1}^{m}\left ( h_{\theta }\left ( x^{\left ( i \right )} \right )-y^{\left ( i \right )} \right )^{2}$">
+<meta property="og:description" content="Overview In 3D compute graphics, ray tracing is rendering technique for generating an visual image by tracing the path of light. it has better effect than either ray casting and scan-line rendering te">
 <meta property="og:image" content="http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png">
-<meta property="og:updated_time" content="2018-07-05T12:41:42.628Z">
+<meta property="og:updated_time" content="2018-07-06T15:27:07.119Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Theory of Ray Tracing">
-<meta name="twitter:description" content="$J \left ( \theta\right )= \frac{1}{2m}\sum_{i=1}^{m}\left ( h_{\theta }\left ( x^{\left ( i \right )} \right )-y^{\left ( i \right )} \right )^{2}$">
+<meta name="twitter:title" content="Ray Tracing Overview">
+<meta name="twitter:description" content="Overview In 3D compute graphics, ray tracing is rendering technique for generating an visual image by tracing the path of light. it has better effect than either ray casting and scan-line rendering te">
 <meta name="twitter:image" content="http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png">
     
 
@@ -160,7 +160,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                15
+                19
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -208,7 +208,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Theory of Ray Tracing
+            Ray Tracing Overview
         </h1>
     
 
@@ -219,7 +219,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/05/Theory-of-Ray-Tracing/">
             <time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">26</span>&nbsp;|&nbsp;Time: <span class="post-count">1</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">643</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -244,7 +244,37 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>$J \left ( \theta\right )= \frac{1}{2m}\sum_{i=1}^{m}\left ( h_{\theta }\left ( x^{\left ( i \right )} \right )-y^{\left ( i \right )} \right )^{2}$</p>
+            <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_10.png" alt=""></p>
+<p>In 3D compute graphics, ray tracing is rendering technique for generating an visual image by tracing the path of light. it has better effect than either ray casting and scan-line rendering techniques.</p>
+<p>Typically, there are two question need be deal:</p>
+<ul>
+<li>What object has been seen?</li>
+<li>What color of the object is under the influence of light and environment?</li>
+</ul>
+<p>In nature, a ray will travel to a surface that stop ray traveling, or until out of energy eventually disappears.<br>there are four things might happen with light ray: <strong>absorption</strong>, <strong>reflection</strong>, <strong>refraction</strong>, <strong>fluorescence</strong>,</p>
+<a id="more"></a>
+<h3 id="Ray-Casting"><a href="#Ray-Casting" class="headerlink" title="Ray Casting"></a>Ray Casting</h3><p>In ancient time, it was used for the study of perspective.</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_2.png" alt=""></p>
+<p>The first ray tracing algorithm used for rendering was presented by Arthur Appel in 1968.[1] This algorithm has since been termed “ray casting”. The idea behind ray casting is to shoot rays from the eye, one per pixel, and find the closest object blocking the path of that ray. Think of an image as a screen-door, with each square in the screen being a pixel. This is then the object the eye sees through that pixel. Using the material properties and the effect of the lights in the scene, this algorithm can determine the shading of this object. The simplifying assumption is made that if a surface faces a light, the light will reach that surface and not be blocked or in shadow. The shading of the surface is computed using traditional 3D computer graphics shading models. One important advantage ray casting offered over older scanline algorithms was its ability to easily deal with non-planar surfaces and solids, such as cones and spheres. If a mathematical surface can be intersected by a ray, it can be rendered using ray casting. Elaborate objects can be created by using solid modeling techniques and easily rendered.</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_3.png" alt=""><br><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_4.png" alt=""></p>
+<h3 id="Ray-Tracing"><a href="#Ray-Tracing" class="headerlink" title="Ray Tracing"></a>Ray Tracing</h3><p>it almost like ray casting, but in ray tracing, it will generate some new ray from the closet intersection point.</p>
+<ul>
+<li>Reflection ray</li>
+<li>Refraction ray</li>
+<li>Shadow rays</li>
+</ul>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_5.png" alt=""></p>
+<p>and this technique also called Recursive Ray Tracing.</p>
+<h4 id="Advantages"><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h4><p>Ray tracing’s popularity stems from its basis in a realistic simulation of lighting over other rendering methods (such as scanline rendering or ray casting). Effects such as reflections and shadows, which are difficult to simulate using other algorithms, are a natural result of the ray tracing algorithm. The computational independence of each ray makes ray tracing amenable to parallelization.</p>
+<h4 id="Disadvantages"><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h4><p>A serious disadvantage of ray tracing is performance (though it can in theory be faster than traditional scanline rendering depending on scene complexity vs. number of pixels on-screen). Scanline algorithms and other algorithms use data coherence to share computations between pixels, while ray tracing normally starts the process anew, treating each eye ray separately. However, this separation offers other advantages, such as the ability to shoot more rays as needed to perform spatial anti-aliasing and improve image quality where needed.</p>
+<p>Although it does handle interreflection and optical effects such as refraction accurately, traditional ray tracing is also not necessarily photorealistic. True photorealism occurs when the rendering equation is closely approximated or fully implemented. Implementing the rendering equation gives true photorealism, as the equation describes every physical effect of light flow. However, this is usually infeasible given the computing resources required.</p>
+<p>The realism of all rendering methods can be evaluated as an approximation to the equation. Ray tracing, if it is limited to Whitted’s algorithm, is not necessarily the most realistic. Methods that trace rays, but include additional techniques (photon mapping, path tracing), give far more accurate simulation of real-world lighting.</p>
+<h4 id="Ray-Tracing-Detail"><a href="#Ray-Tracing-Detail" class="headerlink" title="Ray Tracing Detail"></a>Ray Tracing Detail</h4><p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_6.png" alt=""><br><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_7.png" alt=""><br><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_8.png" alt=""></p>
+<h4 id="Shadow"><a href="#Shadow" class="headerlink" title="Shadow"></a>Shadow</h4><p>At each surface intersection point,a shadow ray is shot towards eachlight source to determine any occlusion between light source and surface point.</p>
+<p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_9.png" alt=""></p>
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><strong><a href="https://en.wikipedia.org/wiki/Ray_tracing" target="_blank" rel="noopener">Ray Tracing Wiki</a> </strong></p>
+<p><strong><a href="http://hucoco.com/file/lec09_ray_tracing.pdf">NUSRI Summer Programme 2016, 3D Graphics Rendering, Lecture 9 Ray Tracing, School of Computing National University of Singapore</a></strong></p>
 
         
         </div>
@@ -255,7 +285,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/05/Theory-of-Ray-Tracing/" data-id="cjj8jjtrq000usob986f1milh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/05/Theory-of-Ray-Tracing/" data-id="cjjfc3ngx0017nsb96ea3uq6q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -330,6 +360,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/07/06/Various-surfaces/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Various surfaces
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/07/04/Physically-Based-Rendering-Catalogue/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
@@ -360,10 +399,86 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/07/10/Do-Ray-Tracing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/DoRayTracing_01.png)" alt="Do Ray Tracing" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Do-Ray-Tracing/" class="title">Do Ray Tracing</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T05:54:10.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/09/Lighting_and_Materials/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png)" alt="Lighting and Materials" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/09/Lighting_and_Materials/" class="title">Lighting and Materials</a></p>
+                            <p class="item-date"><time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/07/Ray-and-Camera/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/ray_00.png)" alt="Ray and Camera" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/07/Ray-and-Camera/" class="title">Ray and Camera</a></p>
+                            <p class="item-date"><time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/06/Various-surfaces/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Various surfaces" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/06/Various-surfaces/" class="title">Various surfaces</a></p>
+                            <p class="item-date"><time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/07/05/Theory-of-Ray-Tracing/" class="thumbnail">
     
     
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Theory of Ray Tracing" class="thumbnail-image"></span>
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Ray Tracing Overview" class="thumbnail-image"></span>
     
 </a>
 
@@ -371,84 +486,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Theory of Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Ray Tracing Overview</a></p>
                             <p class="item-date"><time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/04/Physically-Based-Rendering-Catalogue/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/PBR_0.png)" alt="Physically Based Rendering Catalogue" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
-                            <p class="item-title"><a href="/2018/07/04/Physically-Based-Rendering-Catalogue/" class="title">Physically Based Rendering Catalogue</a></p>
-                            <p class="item-date"><time datetime="2018-07-04T13:57:47.000Z" itemprop="datePublished">2018-07-04</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/04/Ray-Tracing-Catalogue/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Ray Tracing Catalogue" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/04/Ray-Tracing-Catalogue/" class="title">Ray Tracing Catalogue</a></p>
-                            <p class="item-date"><time datetime="2018-07-04T13:26:13.000Z" itemprop="datePublished">2018-07-04</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/03/26/SSE-Instruction-List/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/SIMD/Example_SIMD.jpg)" alt="SSE Instruction List" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/SIMD/">SIMD</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/SIMD/SSE/">SSE</a></p>
-                            <p class="item-title"><a href="/2018/03/26/SSE-Instruction-List/" class="title">SSE Instruction List</a></p>
-                            <p class="item-date"><time datetime="2018-03-26T14:22:53.000Z" itemprop="datePublished">2018-03-26</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/03/10/Sorting-Algorithm/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/PythonSort/6.gif)" alt="Sorting Algorithm" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Sort/">Sort</a></p>
-                            <p class="item-title"><a href="/2018/03/10/Sorting-Algorithm/" class="title">Sorting Algorithm</a></p>
-                            <p class="item-date"><time datetime="2018-03-10T05:07:14.000Z" itemprop="datePublished">2018-03-10</time></p>
                         </div>
                     </li>
                 
@@ -461,7 +500,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -470,7 +509,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
@@ -479,7 +518,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -488,7 +527,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Algorithm/" style="font-size: 16px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 18px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 18px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 14px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 12px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 14px;">Tree</a>
+            <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 12px;">Tree</a>
         </div>
     </div>
 
@@ -520,7 +559,7 @@
         <div id="footer-info" class="inner">
             &copy; 2018 Hu Ke<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
-            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">6.9k</span>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">10.4k</span>
         </div>
     </div>
 </footer>
