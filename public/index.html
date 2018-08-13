@@ -76,7 +76,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -95,10 +95,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
+            POSTS: '포스트',
             PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
@@ -129,7 +129,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
     </div>
 
                 </td>
@@ -149,16 +149,16 @@
             <h2 id="name">Hu Ke</h2>
             <h3 id="title">C++ Developer</h3>
             <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
-            <a id="follow" target="_blank" href="http://github.com/HuCoco/">FOLLOW</a>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">팔로우</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                19
-                <span>posts</span>
+                22
+                <span>포스트</span>
             </div>
             <div class="article-info-block">
                 13
-                <span>tags</span>
+                <span>태그</span>
             </div>
         </div>
         
@@ -194,6 +194,407 @@
 
             
             <section id="main">
+    <article id="post-BRDF" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/07/12/BRDF/">BRDF</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/12/BRDF/">
+            <time datetime="2018-07-12T14:07:13.000Z" itemprop="datePublished">2018-07-12</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">1,855</span>&nbsp;|&nbsp;Time: <span class="post-count">12</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/PBR/">PBR</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>The <strong>BRDF</strong>, or <strong>Bidirectional Reflective Distribution Function</strong> is a function that takes as input the incoming (light) direction $\omega_i$, the outgoing (view) direction $\omega_o$, the surface normal $n$ and a surface parameter a that represents the microsurface’s roughness. The BRDF approximates how much each individual light ray $\omega_i$ contributes to the final reflected light of an opaque surface given its material properties. For instance, if the surface has a perfectly smooth surface (like a mirror) the BRDF function would return 0.0 for all incoming light rays $\omega_i$ except the one ray that has the same (reflected) angle as the outgoing ray $\omega_o$ at which the function returns 1.0.</p>
+<p>A BRDF approximates the material’s reflective and refractive properties based on the previously discussed microfacet theory. For a BRDF to be physically plausible it has to respect the law of energy conservation i.e. the sum of reflected light should never exceed the amount of incoming light. Technically, Blinn-Phong is considered a BRDF taking the same $\omega_i$ and $\omega_o$ as inputs. However, Blinn-Phong is not considered physically based as it doesn’t adhere to the energy conservation principle. There are several physically based BRDFs out there to approximate the surface’s reaction to light. However, almost all real-time render pipelines use a BRDF known as the <strong>Cook-Torrance BRDF</strong>.</p>
+<p>The Cook-Torrance BRDF contains both a diffuse and specular part:</p>
+<script type="math/tex; mode=display">f_r = k_d f_{lambert} + k_s f_{cook-torrance}</script></p>
+            <p class="article-more-link">
+                <a href="/2018/07/12/BRDF/#more">자세히 보기</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/12/BRDF/" data-id="cjjmv08420006j0b9too1cmwz" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-The-Reflectance-Equation" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/07/11/The-Reflectance-Equation/">The Reflection Equation</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/11/The-Reflectance-Equation/">
+            <time datetime="2018-07-11T13:46:22.000Z" itemprop="datePublished">2018-07-11</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">1,046</span>&nbsp;|&nbsp;Time: <span class="post-count">7</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/PBR/">PBR</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Physically based rendering strongly follows a more specialized version of the render equation known as the reflectance equation, which is the best model we have for simulating the visuals of light:</p>
+<script type="math/tex; mode=display">L_o(p,\omega_o) = \int_\Omega f_r(p,\omega_i,\omega_o)L_i(p,\omega_i)n \cdot \omega_id\omega_i</script><p>To understand the equation, we have to delve into a bit of <strong>radiometry</strong>. Radiometry is the measurement of electromagnetic radiation (including visible light). There are several radiometric quantities we can use to measure light over surfaces and directions, but we will only discuss a single one that’s relevant to the reflectance equation known as <strong>radiance</strong>, denoted here as $L$. Radiance is used to quantify the magnitude or strength of light coming from a single direction.</p></p>
+            <p class="article-more-link">
+                <a href="/2018/07/11/The-Reflectance-Equation/#more">자세히 보기</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/11/The-Reflectance-Equation/" data-id="cjjmv084l0011j0b97xvs2ta6" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-Theory-of-PBR" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/07/10/Theory-of-PBR/">Theory of PBR</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/10/Theory-of-PBR/">
+            <time datetime="2018-07-10T14:16:57.000Z" itemprop="datePublished">2018-07-10</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">1,087</span>&nbsp;|&nbsp;Time: <span class="post-count">7</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/PBR/">PBR</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><img src="http://hucoco.com/img/Graphics/PBR/Threoy_of_PBR_00.png" alt=""></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>PBR (<strong>Physically Base Rendering</strong>) is a rendering technique that are more or less based on the same underlying theory which more closely matches that of the physical world. the biggest difference between the physical rendering model and the traditional rendering method is that it can more accurately describe and draw the interaction between the light and the surface of the object.</p></p>
+            <p class="article-more-link">
+                <a href="/2018/07/10/Theory-of-PBR/#more">자세히 보기</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/10/Theory-of-PBR/" data-id="cjjmv084p0019j0b9zznj9uz3" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Do-Ray-Tracing" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -213,7 +614,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/10/Do-Ray-Tracing/">
             <time datetime="2018-07-10T05:54:10.000Z" itemprop="datePublished">2018-07-10</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">885</span>&nbsp;|&nbsp;Time: <span class="post-count">6</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">888</span>&nbsp;|&nbsp;Time: <span class="post-count">6</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -247,7 +648,7 @@
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Ray <span class="title">getRay</span><span class="params">( <span class="keyword">double</span> pixelPosX, <span class="keyword">double</span> pixelPosY )</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Vector3d imgPos = mImageOrigin + (pixelPosX/mImageWidth) * mImageU + (pixelPosY/mImageHeight) * mImageV;</span><br><span class="line">	<span class="keyword">return</span> Ray( mCOP, imgPos - mCOP );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
             <p class="article-more-link">
-                <a href="/2018/07/10/Do-Ray-Tracing/#more">Read More</a>
+                <a href="/2018/07/10/Do-Ray-Tracing/#more">자세히 보기</a>
             </p>
         
         </div>
@@ -258,7 +659,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/10/Do-Ray-Tracing/" data-id="cjjfc3ng20005nsb9l76r6w1i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/10/Do-Ray-Tracing/" data-id="cjjmv0845000bj0b9o5o3a1cx" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -353,7 +754,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/09/Lighting_and_Materials/">
             <time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">595</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">598</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -381,7 +782,7 @@
 <p>Phong lighting is a great and very efficient approximation of lighting, but its specular reflections break down in certain conditions, specifically when the shininess property is low resulting in a large (rough) specular area.</p>
 <p><img src="http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_01.png" alt=""></p></p>
             <p class="article-more-link">
-                <a href="/2018/07/09/Lighting_and_Materials/#more">Read More</a>
+                <a href="/2018/07/09/Lighting_and_Materials/#more">자세히 보기</a>
             </p>
         
         </div>
@@ -392,7 +793,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/09/Lighting_and_Materials/" data-id="cjjfc3ng30006nsb9p9n9y678" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/09/Lighting_and_Materials/" data-id="cjjmv0849000fj0b91xn6ty6f" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -487,7 +888,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/07/Ray-and-Camera/">
             <time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">272</span>&nbsp;|&nbsp;Time: <span class="post-count">2</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">275</span>&nbsp;|&nbsp;Time: <span class="post-count">2</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -526,7 +927,7 @@
 </ul>
 <p><img src="http://hucoco.com/img/Graphics/RayTracing/ray_00.png" alt=""></p></p>
             <p class="article-more-link">
-                <a href="/2018/07/07/Ray-and-Camera/#more">Read More</a>
+                <a href="/2018/07/07/Ray-and-Camera/#more">자세히 보기</a>
             </p>
         
         </div>
@@ -537,7 +938,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/07/Ray-and-Camera/" data-id="cjjfc3ngh000knsb93151ovnd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/07/Ray-and-Camera/" data-id="cjjmv084c000ij0b99n1ofgwu" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -632,7 +1033,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/06/Various-surfaces/">
             <time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">1,133</span>&nbsp;|&nbsp;Time: <span class="post-count">7</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">1,136</span>&nbsp;|&nbsp;Time: <span class="post-count">7</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -669,7 +1070,7 @@
 </ol>
 <p>The normal at the intersection is $N$ (or $-N$)</p></p>
             <p class="article-more-link">
-                <a href="/2018/07/06/Various-surfaces/#more">Read More</a>
+                <a href="/2018/07/06/Various-surfaces/#more">자세히 보기</a>
             </p>
         
         </div>
@@ -680,7 +1081,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/06/Various-surfaces/" data-id="cjjfc3ngw0014nsb9cowb2tlg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/06/Various-surfaces/" data-id="cjjmv084t001hj0b9f05wlxrl" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -775,7 +1176,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/05/Theory-of-Ray-Tracing/">
             <time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">643</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">645</span>&nbsp;|&nbsp;Time: <span class="post-count">4</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -808,7 +1209,7 @@
 </ul>
 <p>In nature, a ray will travel to a surface that stop ray traveling, or until out of energy eventually disappears.<br>there are four things might happen with light ray: <strong>absorption</strong>, <strong>reflection</strong>, <strong>refraction</strong>, <strong>fluorescence</strong>,</p></p>
             <p class="article-more-link">
-                <a href="/2018/07/05/Theory-of-Ray-Tracing/#more">Read More</a>
+                <a href="/2018/07/05/Theory-of-Ray-Tracing/#more">자세히 보기</a>
             </p>
         
         </div>
@@ -819,7 +1220,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/05/Theory-of-Ray-Tracing/" data-id="cjjfc3ngx0017nsb96ea3uq6q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/05/Theory-of-Ray-Tracing/" data-id="cjjmv084r001bj0b9hyhzqm4f" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -943,7 +1344,7 @@
 <p><img src="http://hucoco.com/img/Graphics/PBR/PBR_0.png" alt=""></p>
 <ul>
 <li>Theory of Physically Based Rendering</li>
-<li>The microfacet model</li>
+<li>The Reflectance Equation</li>
 <li>BRDF</li>
 <li>Lighting</li>
 <li>IBL</li>
@@ -958,7 +1359,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/04/Physically-Based-Rendering-Catalogue/" data-id="cjjfc3ngc000fnsb9oizjg09u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/04/Physically-Based-Rendering-Catalogue/" data-id="cjjmv0847000ej0b95b67mmt4" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1053,7 +1454,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/04/Ray-Tracing-Catalogue/">
             <time datetime="2018-07-04T13:26:13.000Z" itemprop="datePublished">2018-07-04</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">49</span>&nbsp;|&nbsp;Time: <span class="post-count">1</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">50</span>&nbsp;|&nbsp;Time: <span class="post-count">1</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -1081,13 +1482,14 @@
             <p>This is catalogue of Ray Tracing, I will update it if I have free time.(It’s means I don’t know what time I will finish one of them.)</p>
 <p><img src="http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png" alt=""></p>
 <ul>
-<li>Theory of ray tracing</li>
-<li>Ray, Scene and Camera</li>
-<li>Various surfaces</li>
-<li>Materials</li>
-<li>Do ray tracing</li>
-<li>Shadow</li>
-<li>Reflection</li>
+<li><a href="http://hucoco.com/2018/07/05/Theory-of-Ray-Tracing/">Theory of ray tracing</a></li>
+<li><a href="http://hucoco.com/2018/07/07/Ray-and-Camera/">Ray and Scene</a></li>
+<li><a href="http://hucoco.com/2018/07/06/Various-surfaces/">Various surfaces</a></li>
+<li><a href="http://hucoco.com/2018/07/09/Lighting_and_Materials/">Lighting and Materials</a></li>
+<li><a href="http://hucoco.com/2018/07/10/Do-Ray-Tracing/">Do ray tracing</a></li>
+</ul>
+<p><strong>Coming soon…</strong></p>
+<ul>
 <li>Ambient Occlusion</li>
 <li>Blur</li>
 </ul>
@@ -1101,581 +1503,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/04/Ray-Tracing-Catalogue/" data-id="cjjfc3ngu0011nsb99d1sddfd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-SSE-Instruction-List" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/03/26/SSE-Instruction-List/">SSE Instruction List</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/03/26/SSE-Instruction-List/">
-            <time datetime="2018-03-26T14:22:53.000Z" itemprop="datePublished">2018-03-26</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">134</span>&nbsp;|&nbsp;Time: <span class="post-count">1</span>&nbsp;Mins <br>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/SIMD/">SIMD</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/SIMD/SSE/">SSE</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/C/">C++</a>, <a class="tag-link" href="/tags/SIMD/">SIMD</a>, <a class="tag-link" href="/tags/SSE/">SSE</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="move-instruction"><a href="#move-instruction" class="headerlink" title="move instruction"></a>move instruction</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>movaps</td>
-<td>move 4 alignment single precision value to xmm register</td>
-</tr>
-<tr>
-<td>movups</td>
-<td>move 4 non-alignment single precision value to xmm register</td>
-</tr>
-<tr>
-<td>movss</td>
-<td>move 1 alignment single precision value to low 4 bytes of register</td>
-</tr>
-<tr>
-<td>movlps</td>
-<td>move 2 alignment single precision value to low 8 bytes of register</td>
-</tr>
-<tr>
-<td>movhps</td>
-<td>move 2 alignment single precision value to high 8 bytes of register</td>
-</tr>
-<tr>
-<td>movlhps</td>
-<td>move 2 alignment single precision value to high 8 bytes of register from low 8 bytes</td>
-</tr>
-<tr>
-<td>movhlps</td>
-<td>move 2 alignment single precision value to low 8 bytes of register from high 8 bytes</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="basic-operation-instruction"><a href="#basic-operation-instruction" class="headerlink" title="basic operation instruction"></a>basic operation instruction</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>addps</td>
-<td>add operation</td>
-</tr>
-<tr>
-<td>subps</td>
-<td>sub operation</td>
-</tr>
-<tr>
-<td>mulps</td>
-<td>mul operation</td>
-</tr>
-<tr>
-<td>divps</td>
-<td>div operation</td>
-</tr>
-<tr>
-<td>rcpps</td>
-<td>rcp opeartion</td>
-</tr>
-<tr>
-<td>sqrtps</td>
-<td>sqrt operation</td>
-</tr>
-<tr>
-<td>rsqrtps</td>
-<td>rcp sqrt operation</td>
-</tr>
-<tr>
-<td>maxps</td>
-<td>get max operation</td>
-</tr>
-<tr>
-<td>minps</td>
-<td>get min operation</td>
-</tr>
-<tr>
-<td>andps</td>
-<td>and operation</td>
-</tr>
-<tr>
-<td>andnps</td>
-<td>negation operation</td>
-</tr>
-<tr>
-<td>orps</td>
-<td>or operation</td>
-</tr>
-<tr>
-<td>xorps</td>
-<td>xor operation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="compared-instruction"><a href="#compared-instruction" class="headerlink" title="compared instruction"></a>compared instruction</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cmpps</td>
-<td>compared operation</td>
-</tr>
-<tr>
-<td>cmpss</td>
-<td>compared operation</td>
-</tr>
-<tr>
-<td>comiss</td>
-<td>compared and set eflags register</td>
-</tr>
-<tr>
-<td>ucomiss</td>
-<td>compared and set eflags register</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>those instruction will return a value:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Return Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Equal to</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Less-than</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Less than or equal to</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Disorder</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Not equal to</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Greater than</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Greater than or equal to</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Order</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://HuCoco.com/2018/03/26/SSE-Instruction-List/" data-id="cjjfc3ngo000tnsb9gnqqe1hg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Sorting-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/03/10/Sorting-Algorithm/">Sorting Algorithm</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/03/10/Sorting-Algorithm/">
-            <time datetime="2018-03-10T05:07:14.000Z" itemprop="datePublished">2018-03-10</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">516</span>&nbsp;|&nbsp;Time: <span class="post-count">3</span>&nbsp;Mins <br>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Sort/">Sort</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Algorithm/">Algorithm</a>, <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/Sort/">Sort</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h1 id="8-Kind-of-Sorting-Algorithm"><a href="#8-Kind-of-Sorting-Algorithm" class="headerlink" title="8 Kind of Sorting Algorithm"></a>8 Kind of Sorting Algorithm</h1><h2 id="Bubble-sort"><a href="#Bubble-sort" class="headerlink" title="Bubble sort"></a>Bubble sort</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def bubble_sort(lists):</span><br><span class="line">    count = len(lists)</span><br><span class="line">    for i in range(0, count):</span><br><span class="line">        for j in range(i + 1, count):</span><br><span class="line">            if lists[i] &gt; lists[j]:</span><br><span class="line">                lists[i], lists[j] = lists[j], lists[i]</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
-<p><img src="http://hucoco.com/img/PythonSort/2.gif" alt=""></p></p>
-            <p class="article-more-link">
-                <a href="/2018/03/10/Sorting-Algorithm/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://HuCoco.com/2018/03/10/Sorting-Algorithm/" data-id="cjjfc3ngp000unsb9ywy0qkck" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-N-Queens-Problem" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/03/09/N-Queens-Problem/">N-Queens Problem</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/03/09/N-Queens-Problem/">
-            <time datetime="2018-03-09T13:51:43.000Z" itemprop="datePublished">2018-03-09</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">394</span>&nbsp;|&nbsp;Time: <span class="post-count">2</span>&nbsp;Mins <br>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm/Problems/">Problems</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Algorithm/">Algorithm</a>, <a class="tag-link" href="/tags/Backtracking/">Backtracking</a>, <a class="tag-link" href="/tags/C/">C++</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h1 id="N-Queens-Problem"><a href="#N-Queens-Problem" class="headerlink" title="N-Queens Problem"></a>N-Queens Problem</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>The eight queens problem is a question with chess as the background: how to place eight queens on an 8×8 chess board so that no queen can directly eat other queens? In order to achieve this purpose, any two queens are not in the same horizontal, vertical or diagonal. The eight queen problem can be extended to the more general N-Queens Problem.</p>
-<p>more information about n-queens problem please google it.</p>
-<h2 id="C-Code"><a href="#C-Code" class="headerlink" title="C++ Code"></a>C++ Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NQueens</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> upperlim = (<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>,<span class="keyword">int</span>,<span class="keyword">int</span>)&gt; dfs = [&amp;](<span class="keyword">int</span> row,<span class="keyword">int</span> ld,<span class="keyword">int</span> rd) &#123;</span><br><span class="line">        <span class="keyword">if</span>(row == upperlim) &#123;++sum;<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> cur = upperlim &amp; (~(row|ld|rd)),pos = <span class="number">0</span>;cur ;dfs(row|pos,(ld|pos)&lt;&lt;<span class="number">1</span>,(rd|pos)&gt;&gt;<span class="number">1</span>)) &#123;</span><br><span class="line">            pos = cur &amp; (-cur);</span><br><span class="line">            cur -= pos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-            <p class="article-more-link">
-                <a href="/2018/03/09/N-Queens-Problem/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://HuCoco.com/2018/03/09/N-Queens-Problem/" data-id="cjjfc3ng8000bnsb974ek3f2v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/04/Ray-Tracing-Catalogue/" data-id="cjjmv084f000oj0b9w5ev6swx" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1752,7 +1580,7 @@
 
 
     <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">다음 &raquo;</a>
     </nav>
 </section>
             
@@ -1761,9 +1589,66 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
+        <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/12/BRDF/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/BRDF_00.png)" alt="BRDF" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/12/BRDF/" class="title">BRDF</a></p>
+                            <p class="item-date"><time datetime="2018-07-12T14:07:13.000Z" itemprop="datePublished">2018-07-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/The-Reflectance-Equation/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/The_Reflection_Equation_00.png)" alt="The Reflection Equation" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/11/The-Reflectance-Equation/" class="title">The Reflection Equation</a></p>
+                            <p class="item-date"><time datetime="2018-07-11T13:46:22.000Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/Theory-of-PBR/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/Threoy_of_PBR_00.png)" alt="Theory of PBR" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Theory-of-PBR/" class="title">Theory of PBR</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T14:16:57.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1803,63 +1688,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/07/Ray-and-Camera/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/ray_00.png)" alt="Ray and Camera" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/07/Ray-and-Camera/" class="title">Ray and Camera</a></p>
-                            <p class="item-date"><time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/06/Various-surfaces/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Various surfaces" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/06/Various-surfaces/" class="title">Various surfaces</a></p>
-                            <p class="item-date"><time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/05/Theory-of-Ray-Tracing/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Ray Tracing Overview" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Ray Tracing Overview</a></p>
-                            <p class="item-date"><time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1867,43 +1695,43 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
+        <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
+        <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
+        <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
+        <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 12px;">Tree</a>
+            <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16.67px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16.67px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18.33px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 13.33px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16.67px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 11.67px;">Tree</a>
         </div>
     </div>
 
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
+        <h3 class="widget-title">링크</h3>
         <div class="widget">
             <ul>
                 
@@ -1928,7 +1756,7 @@
         <div id="footer-info" class="inner">
             &copy; 2018 Hu Ke<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
-            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">10.4k</span>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">14.4k</span>
         </div>
     </div>
 </footer>

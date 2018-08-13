@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuCoco">
 <meta property="og:description" content="Generate RayGenerate a ray that goes from the camera’s origin through the pixel location (pixelPosX, pixelPosY) of the camera. Note that pixelPosX and pixelPosY can be non-integer. The image origin i">
 <meta property="og:image" content="http://hucoco.com/img/Graphics/RayTracing/DoRayTracing_01.png">
-<meta property="og:updated_time" content="2018-07-10T06:50:01.867Z">
+<meta property="og:updated_time" content="2018-07-10T07:28:42.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Do Ray Tracing">
 <meta name="twitter:description" content="Generate RayGenerate a ray that goes from the camera’s origin through the pixel location (pixelPosX, pixelPosY) of the camera. Note that pixelPosX and pixelPosY can be non-integer. The image origin i">
@@ -83,7 +83,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -102,10 +102,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
+            POSTS: '포스트',
             PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
@@ -136,7 +136,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
     </div>
 
                 </td>
@@ -156,16 +156,16 @@
             <h2 id="name">Hu Ke</h2>
             <h3 id="title">C++ Developer</h3>
             <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
-            <a id="follow" target="_blank" href="http://github.com/HuCoco/">FOLLOW</a>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">팔로우</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                19
-                <span>posts</span>
+                22
+                <span>포스트</span>
             </div>
             <div class="article-info-block">
                 13
-                <span>tags</span>
+                <span>태그</span>
             </div>
         </div>
         
@@ -219,7 +219,7 @@
         <i class="fa fa-calendar"></i>
         <a href="/2018/07/10/Do-Ray-Tracing/">
             <time datetime="2018-07-10T05:54:10.000Z" itemprop="datePublished">2018-07-10</time>&nbsp;|&nbsp;
-            WORDS:&nbsp;<span class="post-count">885</span>&nbsp;|&nbsp;Time: <span class="post-count">6</span>&nbsp;Mins <br>
+            WORDS:&nbsp;<span class="post-count">888</span>&nbsp;|&nbsp;Time: <span class="post-count">6</span>&nbsp;Mins <br>
         </a>
     </div>
 
@@ -336,6 +336,8 @@
 <p><img src="http://hucoco.com/img/Graphics/RayTracing/DoRayTracing_01.png" alt="With Anti-Aliasing"></p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">uint32_t</span> y = task-&gt;beginHeight; y &lt; task-&gt;endHeight; y++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint32_t</span> x = <span class="number">0</span>; x &lt; task-&gt;width; x++)</span><br><span class="line">    &#123;</span><br><span class="line">        Color pixelColor = Color(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">uint32_t</span> i = <span class="number">0</span>; i &lt; task-&gt;numSample; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">float</span> xx;</span><br><span class="line">            <span class="keyword">float</span> yy;</span><br><span class="line">            Math::Hammersley(i, task-&gt;numSample, &amp;xx, &amp;yy);</span><br><span class="line">            <span class="keyword">double</span> pixelPosX = x + xx;</span><br><span class="line">            <span class="keyword">double</span> pixelPosY = y + yy;</span><br><span class="line">            Ray ray = task-&gt;scene-&gt;camera.getRay(pixelPosX, pixelPosY);</span><br><span class="line">            pixelColor += Raytrace::TraceRay(ray, *task-&gt;scene, task-&gt;reflectLevels, task-&gt;hasShadow);</span><br><span class="line">        &#125;</span><br><span class="line">        pixelColor /= (<span class="keyword">float</span>)task-&gt;numSample;</span><br><span class="line">        pixelColor.clamp();</span><br><span class="line">        task-&gt;output-&gt;setPixel(x, y, pixelColor);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// printf( "%d ", y );</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">Color Raytrace::TraceRay( <span class="keyword">const</span> Ray &amp;ray, <span class="keyword">const</span> Scene &amp;scene, </span><br><span class="line">					      <span class="keyword">int</span> reflectLevels, <span class="keyword">bool</span> hasShadow )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function">Ray <span class="title">uRay</span><span class="params">( ray )</span></span>;</span><br><span class="line">	uRay.makeUnitDirection();  <span class="comment">// Normalize ray direction.</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> hasHitSomething = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">double</span> <span class="keyword">nearest_t</span> = DEFAULT_TMAX;</span><br><span class="line">	SurfaceHitRecord nearestHitRec;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; scene.numSurfaces; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		SurfaceHitRecord tempHitRec;</span><br><span class="line">		<span class="keyword">bool</span> hasHit = scene.surfacep[i]-&gt;hit( uRay, DEFAULT_TMIN, DEFAULT_TMAX, tempHitRec );</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( hasHit &amp;&amp; tempHitRec.t &lt; <span class="keyword">nearest_t</span> )</span><br><span class="line">		&#123;</span><br><span class="line">			hasHitSomething = <span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">nearest_t</span> = tempHitRec.t;</span><br><span class="line">			nearestHitRec = tempHitRec;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ( !hasHitSomething ) <span class="keyword">return</span> scene.backgroundColor;</span><br><span class="line"></span><br><span class="line">	nearestHitRec.normal.makeUnitVector();</span><br><span class="line">	Vector3d N = nearestHitRec.normal;	<span class="comment">// Unit vector.</span></span><br><span class="line">	Vector3d V = -uRay.direction();		<span class="comment">// Unit vector.</span></span><br><span class="line">    </span><br><span class="line">	<span class="function">Color <span class="title">result</span><span class="params">( <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span> )</span></span>;	<span class="comment">// The result will be accumulated here.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> shadow = <span class="number">1.0f</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; scene.numPtLights ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        Vector3d Lin = scene.ptLight[i].position - nearestHitRec.p;</span><br><span class="line">        <span class="keyword">double</span> MaxLength = (Lin).length();</span><br><span class="line">        <span class="keyword">double</span> invLen = <span class="number">1</span> / MaxLength;</span><br><span class="line">        Vector3d L = (Lin)*invLen;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(hasShadow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">Ray <span class="title">newRay</span><span class="params">(nearestHitRec.p,L)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; scene.numSurfaces ; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(scene.surfacep[j]-&gt;shadowHit(newRay, DEFAULT_TMIN, MaxLength))</span><br><span class="line">                &#123;</span><br><span class="line">                    shadow = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(shadow == <span class="literal">false</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        result += computePhongLighting(L, N, V, *nearestHitRec.mat_ptr, scene.ptLight[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    result += scene.amLight.I_a * nearestHitRec.mat_ptr-&gt;k_a;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(reflectLevels &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Vector3d dir = mirrorReflect(V, N);</span><br><span class="line">        <span class="function">Ray <span class="title">rRay</span><span class="params">(nearestHitRec.p,dir)</span></span>;</span><br><span class="line">        result += nearestHitRec.mat_ptr-&gt;k_rg * TraceRay(rRay,scene,--reflectLevels,hasShadow);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><strong><a href="https://learnopengl.com/" target="_blank" rel="noopener">Learn OpenGL</a> </strong></p>
+
         
         </div>
         <footer class="article-footer">
@@ -345,7 +347,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/07/10/Do-Ray-Tracing/" data-id="cjjfc3ng20005nsb9l76r6w1i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://HuCoco.com/2018/07/10/Do-Ray-Tracing/" data-id="cjjmv0845000bj0b9o5o3a1cx" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -420,9 +422,18 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/07/10/Theory-of-PBR/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">다음 글</strong>
+            <div class="article-nav-title">
+                
+                    Theory of PBR
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/07/09/Lighting_and_Materials/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
+            <strong class="article-nav-caption">이전 글</strong>
             <div class="article-nav-title">Lighting and Materials</div>
         </a>
     
@@ -443,9 +454,66 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
+        <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/12/BRDF/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/BRDF_00.png)" alt="BRDF" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/12/BRDF/" class="title">BRDF</a></p>
+                            <p class="item-date"><time datetime="2018-07-12T14:07:13.000Z" itemprop="datePublished">2018-07-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/The-Reflectance-Equation/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/The_Reflection_Equation_00.png)" alt="The Reflection Equation" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/11/The-Reflectance-Equation/" class="title">The Reflection Equation</a></p>
+                            <p class="item-date"><time datetime="2018-07-11T13:46:22.000Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/Theory-of-PBR/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/Threoy_of_PBR_00.png)" alt="Theory of PBR" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Theory-of-PBR/" class="title">Theory of PBR</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T14:16:57.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -485,63 +553,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/07/Ray-and-Camera/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/ray_00.png)" alt="Ray and Camera" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/07/Ray-and-Camera/" class="title">Ray and Camera</a></p>
-                            <p class="item-date"><time datetime="2018-07-07T08:08:16.000Z" itemprop="datePublished">2018-07-07</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/06/Various-surfaces/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_0.png)" alt="Various surfaces" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/06/Various-surfaces/" class="title">Various surfaces</a></p>
-                            <p class="item-date"><time datetime="2018-07-06T15:28:40.000Z" itemprop="datePublished">2018-07-06</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/05/Theory-of-Ray-Tracing/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/RayTracing_1.png)" alt="Ray Tracing Overview" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
-                            <p class="item-title"><a href="/2018/07/05/Theory-of-Ray-Tracing/" class="title">Ray Tracing Overview</a></p>
-                            <p class="item-date"><time datetime="2018-07-05T12:09:50.000Z" itemprop="datePublished">2018-07-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -549,43 +560,43 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">categories</h3>
+        <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
+        <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tags</h3>
+        <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">tag cloud</h3>
+        <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 10px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 12px;">Tree</a>
+            <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16.67px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16.67px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18.33px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 13.33px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16.67px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 11.67px;">Tree</a>
         </div>
     </div>
 
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
+        <h3 class="widget-title">링크</h3>
         <div class="widget">
             <ul>
                 
@@ -610,7 +621,7 @@
         <div id="footer-info" class="inner">
             &copy; 2018 Hu Ke<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
-            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">10.4k</span>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">14.4k</span>
         </div>
     </div>
 </footer>

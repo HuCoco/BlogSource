@@ -14,7 +14,7 @@ This is catalogue of Physically Based Rendering, I will update it if I have free
 ![](http://hucoco.com/img/Graphics/PBR/PBR_0.png)
 
 * Theory of Physically Based Rendering
-* The microfacet model
+* The Reflectance Equation
 * BRDF
 * Lighting
 * IBL

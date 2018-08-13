@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>BRDF | HuCoco</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="The BRDF, or Bidirectional Reflective Distribution Function is a function that takes as input the incoming (light) direction $\omega_i$, the outgoing (view) direction $\omega_o$, the surface normal $n">
+<meta name="keywords" content="Graphics,PBR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BRDF">
+<meta property="og:url" content="http://HuCoco.com/2018/07/12/BRDF/index.html">
+<meta property="og:site_name" content="HuCoco">
+<meta property="og:description" content="The BRDF, or Bidirectional Reflective Distribution Function is a function that takes as input the incoming (light) direction $\omega_i$, the outgoing (view) direction $\omega_o$, the surface normal $n">
+<meta property="og:image" content="http://hucoco.com/img/Graphics/PBR/BRDF_00.png">
+<meta property="og:updated_time" content="2018-07-15T13:11:41.832Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BRDF">
+<meta name="twitter:description" content="The BRDF, or Bidirectional Reflective Distribution Function is a function that takes as input the incoming (light) direction $\omega_i$, the outgoing (view) direction $\omega_o$, the surface normal $n">
+<meta name="twitter:image" content="http://hucoco.com/img/Graphics/PBR/BRDF_00.png">
+    
+
+    
+        <link rel="alternate" href="/" title="HuCoco" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">HuCoco</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">Hu Ke</h2>
+            <h3 id="title">C++ Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">팔로우</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>포스트</span>
+            </div>
+            <div class="article-info-block">
+                13
+                <span>태그</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/HuCoco/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="wechat" class=tooltip>
+                            <i class="fa fa-wechat"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-BRDF" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            BRDF
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/07/12/BRDF/">
+            <time datetime="2018-07-12T14:07:13.000Z" itemprop="datePublished">2018-07-12</time>&nbsp;|&nbsp;
+            WORDS:&nbsp;<span class="post-count">1,855</span>&nbsp;|&nbsp;Time: <span class="post-count">12</span>&nbsp;Mins <br>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/PBR/">PBR</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>The <strong>BRDF</strong>, or <strong>Bidirectional Reflective Distribution Function</strong> is a function that takes as input the incoming (light) direction $\omega_i$, the outgoing (view) direction $\omega_o$, the surface normal $n$ and a surface parameter a that represents the microsurface’s roughness. The BRDF approximates how much each individual light ray $\omega_i$ contributes to the final reflected light of an opaque surface given its material properties. For instance, if the surface has a perfectly smooth surface (like a mirror) the BRDF function would return 0.0 for all incoming light rays $\omega_i$ except the one ray that has the same (reflected) angle as the outgoing ray $\omega_o$ at which the function returns 1.0.</p>
+<p>A BRDF approximates the material’s reflective and refractive properties based on the previously discussed microfacet theory. For a BRDF to be physically plausible it has to respect the law of energy conservation i.e. the sum of reflected light should never exceed the amount of incoming light. Technically, Blinn-Phong is considered a BRDF taking the same $\omega_i$ and $\omega_o$ as inputs. However, Blinn-Phong is not considered physically based as it doesn’t adhere to the energy conservation principle. There are several physically based BRDFs out there to approximate the surface’s reaction to light. However, almost all real-time render pipelines use a BRDF known as the <strong>Cook-Torrance BRDF</strong>.</p>
+<p>The Cook-Torrance BRDF contains both a diffuse and specular part:</p>
+<script type="math/tex; mode=display">f_r = k_d f_{lambert} + k_s f_{cook-torrance}</script><a id="more"></a>
+<h2 id="Diffuse-Part"><a href="#Diffuse-Part" class="headerlink" title="Diffuse Part"></a>Diffuse Part</h2><p>Here kd is the earlier mentioned ratio of incoming light energy that gets refracted with ks being the ratio that gets reflected. The left side of the BRDF states the diffuse part of the equation denoted here as flambert. This is known as Lambertian diffuse similar to what we used for diffuse shading which is a constant factor denoted as:</p>
+<script type="math/tex; mode=display">f_{lambert} = \frac{c}{\pi}</script><p>With c being the albedo or surface color (think of the diffuse surface texture). The divide by pi is there to normalize the diffuse light as the earlier denoted integral that contains the BRDF is scaled by $\pi$</p>
+<p>You might wonder how this Lambertian diffuse relates to the diffuse term we’ve been using before: the surface color multiplied by the dot product between the surface’s normal and the light direction. The dot product is still there, but moved out of the BRDF as we find $n \cdot \omega_i$ at the end of the $L_o$ integral.</p>
+<p>There exist different equations for the diffuse part of the BRDF which tend to look more realistic, but are also more computationally expensive. As concluded by Epic Games however, the Lambertian diffuse is sufficient enough for most real-time rendering purposes.</p>
+<h2 id="Specluar-Part"><a href="#Specluar-Part" class="headerlink" title="Specluar Part"></a>Specluar Part</h2><p>The specular part of the BRDF is a bit more advanced and is described as:</p>
+<script type="math/tex; mode=display">f_{cook-torrance} = \frac{DFG}{4(\omega_o \cdot n)(\omega_i \cdot n)}</script><p>he Cook-Torrance specular BRDF consists of three functions and a normalization factor in the denominator. Each of the D, F and G symbols represent a type of function that approximates a specific part of the surface’s reflective properties. These are defined as the normal <strong>D</strong>istribution function, the <strong>F</strong>resnel equation and the <strong>G</strong>eometry function:</p>
+<ul>
+<li><strong>Normal distribution function:</strong> approximates the amount the surface’s microfacets are aligned to the halfway vector influenced by the roughness of the surface; this is the primary function approximating the microfacets.</li>
+<li><strong>Geometry function:</strong> describes the self-shadowing property of the microfacets. When a surface is relatively rough the surface’s microfacets can overshadow other microfacets thereby reducing the light the surface reflects.</li>
+<li><strong>Fresnel equation:</strong> The Fresnel equation describes the ratio of surface reflection at different surface angles.</li>
+</ul>
+<h3 id="Normal-distribution-function"><a href="#Normal-distribution-function" class="headerlink" title="Normal distribution function"></a>Normal distribution function</h3><p>The normal distribution function <strong>D</strong> statistically approximates the relative surface area of microfacets exactly aligned to the (halfway) vector $h$. There are a multitude of NDFs defined that statistically approximate the general alignment of the microfacets given some roughness parameter and the one we’ll be using is known as the Trowbridge-Reitz GGX:</p>
+<script type="math/tex; mode=display">NDF_{GGX}(n,h,\alpha) = \frac{\alpha^2}{\pi ((n \cdot h)^2(\alpha^2 - 1) + 1)^2}</script><p>Here $h$ is the halfway vector to measure against the surface’s microfacets, with a being a measure of the surface’s roughness. If we take $h$ as the halfway vector between the surface normal and light direction over varying roughness parameters we get the following visual result:</p>
+<p><img src="http://hucoco.com/img/Graphics/PBR/BRDF_01.png" alt=""></p>
+<p>When the roughness is low (thus the surface is smooth) a highly concentrated number of microfacets are aligned to halfway vectors over a small radius. Due to this high concentration the NDF displays a very bright spot. On a rough surface however, where the microfacets are aligned in much more random directions, you’ll find a much larger number of halfway vectors h somewhat aligned to the microfacets, but less concentrated giving us the more grayish results.</p>
+<p>In GLSL code the Trowbridge-Reitz GGX normal distribution function would look a bit like this:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">NormalDistributionFunction</span><span class="params">(<span class="keyword">float</span> NoH, <span class="keyword">float</span> Roughness)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> a = Roughness * Roughness;</span><br><span class="line">    <span class="keyword">float</span> a2 = a * a;</span><br><span class="line">    <span class="keyword">float</span> NdotH = max(NoH, <span class="number">0.0f</span>);</span><br><span class="line">    <span class="keyword">float</span> NdotH2 = NdotH * NdotH;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> nom = a2;</span><br><span class="line">    <span class="keyword">float</span> denom = (NdotH2 * (a2 - <span class="number">1.0</span>) + <span class="number">1.0</span>);</span><br><span class="line">    denom = <span class="number">3.141592</span> * denom * denom;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nom / denom;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Geometry-function"><a href="#Geometry-function" class="headerlink" title="Geometry function"></a>Geometry function</h3><p>The geometry function statistically approximates the relative surface area where its micro surface-details overshadow each other causing light rays to be occluded.</p>
+<p><img src="http://hucoco.com/img/Graphics/PBR/BRDF_02.png" alt=""></p>
+<p>Similar to the NDF, the Geometry function takes a material’s roughness parameter as input with rougher surfaces having a higher probability of overshadowing microfacets. The geometry function we will use is a combination of the GGX and Schlick-Beckmann approximation known as Schlick-GGX:</p>
+<script type="math/tex; mode=display">G_{schlickGGX}(n,v,k) = \frac{n \cdot v}{(n \cdot v)(1-k) + k}</script><p>Here $k$ is a remapping of α based on whether we’re using the geometry function for either direct lighting or IBL lighting:</p>
+<script type="math/tex; mode=display">k_{direct} = \frac{(\alpha + 1)^2}{8}</script><script type="math/tex; mode=display">k_{IBL} = \frac{\alpha^2}{2}</script><p>Note that the value of $\alpha$ might differ based on how your engine translates roughness to $\alpha$. In the following tutorials we’ll extensively discuss how and where this remapping becomes relevant.</p>
+<p>To effectively approximate the geometry we need to take account of both the view direction (geometry obstruction) and the light direction vector (geometry shadowing). We can take both into account using Smith’s method:</p>
+<script type="math/tex; mode=display">G(n,v,l,k) = G_{sub}(n,v,k)G_{sub}(n,l,k)</script><p>Using Smith’s method with Schlick-GGX as $G_{sub}$ gives the following visual appearance over varying roughness R:</p>
+<p><img src="http://hucoco.com/img/Graphics/PBR/BRDF_03.png" alt=""></p>
+<p>The geometry function is a multiplier between [0.0, 1.0] with white or 1.0 measuring no microfacet shadowing and black or 0.0 complete microfacet shadowing.</p>
+<p>In GLSL the geometry function translates to the following code:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">GeometrychlickGGX</span><span class="params">(<span class="keyword">float</span> NoV, <span class="keyword">float</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> nom = NoV;</span><br><span class="line">    <span class="keyword">float</span> denom = NoV * (<span class="number">1.0</span> - k) + k;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nom / denom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">GeometryFunction</span><span class="params">(vec3 N, vec3 V, vec3 L, <span class="keyword">float</span> Roughness)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> k = <span class="built_in">pow</span>(Roughness + <span class="number">1</span>, <span class="number">2</span>) / <span class="number">8.0f</span>;</span><br><span class="line">    <span class="keyword">float</span> NoV = max(dot(N, V), <span class="number">0.0</span>);</span><br><span class="line">    <span class="keyword">float</span> NoL = max(dot(N, L), <span class="number">0.0</span>);</span><br><span class="line">    <span class="keyword">float</span> ggx1 = GeometrychlickGGX(NoV, k);</span><br><span class="line">    <span class="keyword">float</span> ggx2 = GeometrychlickGGX(NoL, k);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ggx1 * ggx2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Fresnel-equation"><a href="#Fresnel-equation" class="headerlink" title="Fresnel equation"></a>Fresnel equation</h3><p>The Fresnel equation (pronounced as Freh-nel) describes the ratio of light that gets reflected over the light that gets refracted, which varies over the angle we’re looking at a surface. The moment light hits a surface, based on the surface to view angle the Fresnel equation tells us the percentage of light that gets reflected. From this ratio of reflection and the energy conservation principle we can directly obtain the refracted portion of light from its remaining energy.</p>
+<p>Every surface or material has a level of base reflectivity when looking straight at its surface, but when looking at the surface from an angle all reflections become more apparent compared to the surface’s base reflectivity. You can check this for yourself by looking at your presumably wooden/metallic desk which has a certain level of base reflectivity from a perpendicular view angle, but by looking at your desk from an almost 90 degree angle you’ll see the reflections become much more apparent. All surfaces theoretically fully reflect light if seen from perfect 90-degree angles. This phenomenon is known as Fresnel and is described by the Fresnel equation.</p>
+<p>The Fresnel equation is a rather complex equation, but luckily the Fresnel equation can be approximated using the Fresnel-Schlick approximation:</p>
+<script type="math/tex; mode=display">F_{schlick}(h,v,F_0) = F_0 + (1 - F_0)(1 - (h \cdot v))^5</script><p>$F_0$ represents the base reflectivity of the surface, which we calculate using something called the indices of refraction or IOR and as you can see on a sphere surface, the more we look towards the surface’s grazing angles (with the halfway-view angle reaching 90 degrees) the stronger the Fresnel and thus the reflections:</p>
+<p><img src="http://hucoco.com/img/Graphics/PBR/BRDF_04.png" alt=""></p>
+<p>There are a few subtleties involved with the Fresnel equation. One is that the Fresnel-Schlick approximation is only really defined for dielectric or non-metal surfaces. For conductor surfaces (metals) calculating the base reflectivity using their indices of refraction doesn’t properly hold and we need to use a different Fresnel equation for conductors altogether. As this is inconvenient we further approximate by pre-computing the surface’s response at normal incidence ($F0$) (at a 0 degree angle as if looking directly onto a surface) and interpolate this value based on the view angle as per the Fresnel-Schlick approximation such that we can use the same equation for both metals and non-metals.</p>
+<p>These specific attributes of metallic surfaces compared to dielectric surfaces gave rise to something called the metallic workflow where we author surface materials with an extra parameter known as metalness that describes whether a surface is either a metallic or a non-metallic surface.</p>
+<p>Theoretically the metalness of a surface is binary: it’s either a metal or it isn’t; it can’t be both. However, most render pipelines allow configuring the metalness of a surface linearly between 0.0 and 1.0. This is mostly because of the lack of material texture precision to describe for instance a surface having small dust/sand-like particles/scratches over a metallic surface. By balancing the metalness value around these small non-metallic like particles/scratches we get visually pleasable results.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vec3 <span class="title">FresnelEquation</span><span class="params">(vec3 N, vec3 V, vec3 F)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> NoV = dot(N, V);</span><br><span class="line">    vec3 res = F + (vec3(<span class="number">1.0f</span>) - F) * <span class="built_in">pow</span>(<span class="number">1.0f</span> - NoV, <span class="number">5</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Cook-Torrance-reflectance-equation"><a href="#Cook-Torrance-reflectance-equation" class="headerlink" title="Cook-Torrance reflectance equation"></a>Cook-Torrance reflectance equation</h3><p>With every component of the Cook-Torrance BRDF described we can include the physically based BRDF into the now final reflectance equation:</p>
+<script type="math/tex; mode=display">L_o(p,w_o) = \int_\pi(k_d \frac{c}{\pi} + k_s \frac{DFG}{4(w_o \cdot n)(w_i \cdot n)})L_i(p,w_i)n \cdot w_idw_i</script><p>This equation is however not fully mathematically correct. You may remember that the Fresnel term $F$ represents the ratio of light that gets reflected on a surface. This is effectively our ratio $k_s$, meaning the specular part of the reflectance equation implicitly contains the reflectance ratio $k_s$. Given this, our final final reflectance equation becomes:</p>
+<script type="math/tex; mode=display">L_o(p,w_o) = \int_\pi(k_d \frac{c}{\pi} + \frac{DFG}{4(w_o \cdot n)(w_i \cdot n)})L_i(p,w_i)n \cdot w_idw_i</script><p>This equation now completely describes a physically based render model that is generally recognized as what we commonly understand as physically based rendering or PBR. Don’t worry if you didn’t yet completely understand how we’ll need to fit all the discussed mathematics together in code. In the next tutorials, we’ll explore how to utilize the reflectance equation to get much more physically plausible results in our rendered lighting and all the bits and pieces should slowly start to fit together.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><strong><a href="https://learnopengl.com/PBR/Theory" target="_blank" rel="noopener">Learn OpenGL PBR Theory</a> </strong></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://HuCoco.com/2018/07/12/BRDF/" data-id="cjjmv08420006j0b9too1cmwz" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/07/11/The-Reflectance-Equation/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">이전 글</strong>
+            <div class="article-nav-title">The Reflection Equation</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/12/BRDF/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/BRDF_00.png)" alt="BRDF" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/12/BRDF/" class="title">BRDF</a></p>
+                            <p class="item-date"><time datetime="2018-07-12T14:07:13.000Z" itemprop="datePublished">2018-07-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/The-Reflectance-Equation/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/The_Reflection_Equation_00.png)" alt="The Reflection Equation" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/11/The-Reflectance-Equation/" class="title">The Reflection Equation</a></p>
+                            <p class="item-date"><time datetime="2018-07-11T13:46:22.000Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/Theory-of-PBR/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/PBR/Threoy_of_PBR_00.png)" alt="Theory of PBR" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/PBR/">PBR</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Theory-of-PBR/" class="title">Theory of PBR</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T14:16:57.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/10/Do-Ray-Tracing/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/DoRayTracing_01.png)" alt="Do Ray Tracing" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/10/Do-Ray-Tracing/" class="title">Do Ray Tracing</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T05:54:10.000Z" itemprop="datePublished">2018-07-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/09/Lighting_and_Materials/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://hucoco.com/img/Graphics/RayTracing/lighting_and_matrials_00.png)" alt="Lighting and Materials" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphics/">Graphics</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a></p>
+                            <p class="item-title"><a href="/2018/07/09/Lighting_and_Materials/" class="title">Lighting and Materials</a></p>
+                            <p class="item-date"><time datetime="2018-07-09T12:59:05.000Z" itemprop="datePublished">2018-07-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16.67px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16.67px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18.33px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 13.33px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16.67px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 11.67px;">Tree</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">링크</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div class="outer">	
+        <div id="footer-info" class="inner">
+            &copy; 2018 Hu Ke<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a><br>
+            Visited:&nbsp;<span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv"></span></span>&nbsp;|&nbsp;Total Words:&nbsp;<span class="post-count">14.4k</span>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

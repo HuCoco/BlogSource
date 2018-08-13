@@ -367,3 +367,7 @@ Should not accept intersection for very small positive $t$
 
 ![](http://hucoco.com/img/Graphics/RayTracing/epslion_problem_00.png)
 ![](http://hucoco.com/img/Graphics/RayTracing/epslion_problem_01.png)
+
+## Reference
+
+**[Learn OpenGL](https://learnopengl.com/) **

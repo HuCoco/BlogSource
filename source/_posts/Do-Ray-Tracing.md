@@ -250,3 +250,7 @@ Color Raytrace::TraceRay( const Ray &ray, const Scene &scene,
 	return result;
 }
 ```
+
+## Reference
+
+**[Learn OpenGL](https://learnopengl.com/) **
