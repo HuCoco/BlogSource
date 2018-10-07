@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
     <meta charset="utf-8">
     
@@ -9,6 +9,7 @@
 <meta property="og:title" content="HuCoco">
 <meta property="og:url" content="http://HuCoco.com/page/2/index.html">
 <meta property="og:site_name" content="HuCoco">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HuCoco">
     
@@ -76,7 +77,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -95,10 +96,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '포스트',
+            POSTS: 'Posts',
             PAGES: 'Pages',
-            CATEGORIES: '카테고리',
-            TAGS: '태그',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
@@ -129,7 +130,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
     </div>
 
                 </td>
@@ -149,16 +150,16 @@
             <h2 id="name">Hu Ke</h2>
             <h3 id="title">C++ Developer</h3>
             <span id="location"><i class="fa fa-map-marker"></i>Chengdu, China</span>
-            <a id="follow" target="_blank" href="http://github.com/HuCoco/">팔로우</a>
+            <a id="follow" target="_blank" href="http://github.com/HuCoco/">FOLLOW</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
                 22
-                <span>포스트</span>
+                <span>posts</span>
             </div>
             <div class="article-info-block">
                 13
-                <span>태그</span>
+                <span>tags</span>
             </div>
         </div>
         
@@ -425,7 +426,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/26/SSE-Instruction-List/" data-id="cjjmv084j000uj0b9oqazj7sp" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/26/SSE-Instruction-List/" data-id="cjmyp36ua000yssb9nwmnt33b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -547,7 +548,7 @@
             <p><h1 id="8-Kind-of-Sorting-Algorithm"><a href="#8-Kind-of-Sorting-Algorithm" class="headerlink" title="8 Kind of Sorting Algorithm"></a>8 Kind of Sorting Algorithm</h1><h2 id="Bubble-sort"><a href="#Bubble-sort" class="headerlink" title="Bubble sort"></a>Bubble sort</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def bubble_sort(lists):</span><br><span class="line">    count = len(lists)</span><br><span class="line">    for i in range(0, count):</span><br><span class="line">        for j in range(i + 1, count):</span><br><span class="line">            if lists[i] &gt; lists[j]:</span><br><span class="line">                lists[i], lists[j] = lists[j], lists[i]</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
 <p><img src="http://hucoco.com/img/PythonSort/2.gif" alt=""></p></p>
             <p class="article-more-link">
-                <a href="/2018/03/10/Sorting-Algorithm/#more">자세히 보기</a>
+                <a href="/2018/03/10/Sorting-Algorithm/#more">Read More</a>
             </p>
         
         </div>
@@ -558,7 +559,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/10/Sorting-Algorithm/" data-id="cjjmv084n0015j0b9sebelkbj" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/10/Sorting-Algorithm/" data-id="cjmyp36uc0011ssb97y60h5a5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -681,7 +682,7 @@
 <p>more information about n-queens problem please google it.</p>
 <h2 id="C-Code"><a href="#C-Code" class="headerlink" title="C++ Code"></a>C++ Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NQueens</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> upperlim = (<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span>, sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>,<span class="keyword">int</span>,<span class="keyword">int</span>)&gt; dfs = [&amp;](<span class="keyword">int</span> row,<span class="keyword">int</span> ld,<span class="keyword">int</span> rd) &#123;</span><br><span class="line">        <span class="keyword">if</span>(row == upperlim) &#123;++sum;<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> cur = upperlim &amp; (~(row|ld|rd)),pos = <span class="number">0</span>;cur ;dfs(row|pos,(ld|pos)&lt;&lt;<span class="number">1</span>,(rd|pos)&gt;&gt;<span class="number">1</span>)) &#123;</span><br><span class="line">            pos = cur &amp; (-cur);</span><br><span class="line">            cur -= pos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
             <p class="article-more-link">
-                <a href="/2018/03/09/N-Queens-Problem/#more">자세히 보기</a>
+                <a href="/2018/03/09/N-Queens-Problem/#more">Read More</a>
             </p>
         
         </div>
@@ -692,7 +693,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/09/N-Queens-Problem/" data-id="cjjmv084d000kj0b9gpzpmwre" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/09/N-Queens-Problem/" data-id="cjmyp36tz000fssb9h0o7qchd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -833,7 +834,7 @@
 <p>The vertex A does not depend on the vertex, which means there is no edge to the end of the A.</p>
 </blockquote></p>
             <p class="article-more-link">
-                <a href="/2018/03/08/Topological-Sort/#more">자세히 보기</a>
+                <a href="/2018/03/08/Topological-Sort/#more">Read More</a>
             </p>
         
         </div>
@@ -844,7 +845,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/08/Topological-Sort/" data-id="cjjmv084s001ej0b9bmrr9kop" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/08/Topological-Sort/" data-id="cjmyp36uf0019ssb9ow0wveuw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -970,7 +971,7 @@
 <h2 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h2><h3 id="Breadth-first-search-for-undirected-graphs"><a href="#Breadth-first-search-for-undirected-graphs" class="headerlink" title="Breadth first search for undirected graphs"></a>Breadth first search for undirected graphs</h3><p>The following is an example of undirected graph, to demonstrate the depth-first search.</p>
 <p><img src="http://hucoco.com/img/Graph/UDG.png" alt="Undirected Graphs"></p></p>
             <p class="article-more-link">
-                <a href="/2018/03/07/Breadth-First-Search/#more">자세히 보기</a>
+                <a href="/2018/03/07/Breadth-First-Search/#more">Read More</a>
             </p>
         
         </div>
@@ -981,7 +982,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/07/Breadth-First-Search/" data-id="cjjmv0845000aj0b9wzxsds4r" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/07/Breadth-First-Search/" data-id="cjmyp36tn0002ssb90oto3efv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1106,7 +1107,7 @@
 <h2 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h2><h3 id="Depth-first-search-for-undirected-graphs"><a href="#Depth-first-search-for-undirected-graphs" class="headerlink" title="Depth first search for undirected graphs"></a>Depth first search for undirected graphs</h3><p>The following is an example of undirected graph, to demonstrate the depth first search.</p>
 <p><img src="http://hucoco.com/img/Graph/UDG.png" alt="Undirected Graphs"></p></p>
             <p class="article-more-link">
-                <a href="/2018/03/07/Depth-First-Search/#more">자세히 보기</a>
+                <a href="/2018/03/07/Depth-First-Search/#more">Read More</a>
             </p>
         
         </div>
@@ -1117,7 +1118,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/07/Depth-First-Search/" data-id="cjjmv083y0002j0b98es83sj8" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/07/Depth-First-Search/" data-id="cjmyp36tu000assb9g71t9075" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1241,7 +1242,7 @@
 <p><img src="http://hucoco.com/img/Graph/UDG.png" alt="Adjacency Matrix Undirected Graph"></p>
 <p>The above graph contains 7 vertices of <code>A, B, C, D, E, F, G</code>, and it also contains<code>&lt;A,C&gt;, &lt;A,D&gt;, &lt;A,F&gt;, &lt;B,C&gt;, &lt;C,D&gt;, &lt;E,G&gt;, &lt;F,G&gt;</code>, in total 7 edges. Since this is an undirected graph, the edge <code>&lt;A,C&gt;</code> and the edge <code>&lt;C,A&gt;</code> are the same edges. The table of edges is listed in alphabetical order..</p></p>
             <p class="article-more-link">
-                <a href="/2018/03/06/Adjacency-List-Graph/#more">자세히 보기</a>
+                <a href="/2018/03/06/Adjacency-List-Graph/#more">Read More</a>
             </p>
         
         </div>
@@ -1252,7 +1253,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/06/Adjacency-List-Graph/" data-id="cjjmv083t0000j0b9p33yf7he" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/06/Adjacency-List-Graph/" data-id="cjmyp36ti0000ssb9stwd6acs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1376,7 +1377,7 @@
 <p><img src="http://hucoco.com/img/Graph/UDG.png" alt="Adjacency Matrix Undirected Graph"></p>
 <p>The above graph contains 7 vertices of A, B, C, D, E, F, G, and it also contains<a,c>, <a,d>, <a,f>, <b,c>, <c,d>, <e,g>, <f,g>, in total 7 edges. Since this is an undirected graph, the edge <a,c> and the edge <c,a>are the same edges. The table of edges is listed in alphabetical order.</c,a></a,c></f,g></e,g></c,d></b,c></a,f></a,d></a,c></p></p>
             <p class="article-more-link">
-                <a href="/2018/03/06/Adjacency-Matrix-Graph/#more">자세히 보기</a>
+                <a href="/2018/03/06/Adjacency-Matrix-Graph/#more">Read More</a>
             </p>
         
         </div>
@@ -1387,7 +1388,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/06/Adjacency-Matrix-Graph/" data-id="cjjmv08410005j0b93gecoqgl" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/06/Adjacency-Matrix-Graph/" data-id="cjmyp36tq0005ssb9t2ldbzkd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1511,7 +1512,7 @@
 <h3 id="Types-of-Graphs"><a href="#Types-of-Graphs" class="headerlink" title="Types of Graphs"></a>Types of Graphs</h3><p>According to whether the direction of the edge, the graph can be divided into: undirected and directed graph.</p>
 <h4 id="Undirected-graph"><a href="#Undirected-graph" class="headerlink" title="Undirected graph"></a>Undirected graph</h4><p><img src="http://hucoco.com/img/Graph/UDG.png" alt=""></p></p>
             <p class="article-more-link">
-                <a href="/2018/03/04/Basic-Graph-Theory/#more">자세히 보기</a>
+                <a href="/2018/03/04/Basic-Graph-Theory/#more">Read More</a>
             </p>
         
         </div>
@@ -1522,7 +1523,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/04/Basic-Graph-Theory/" data-id="cjjmv08430007j0b9lc58x0dy" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/04/Basic-Graph-Theory/" data-id="cjmyp36tt0007ssb9wnftbuvc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1646,7 +1647,7 @@
 <h2 id="Basic-operation-of-red-black-trees"><a href="#Basic-operation-of-red-black-trees" class="headerlink" title="Basic operation of red black trees"></a>Basic operation of red black trees</h2><h3 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h3><p>The method of deleting a node is the same as that of deleting a node in a binary search tree.</p>
 <h4 id="Binary-search-tree-Delete-pseudo-code"><a href="#Binary-search-tree-Delete-pseudo-code" class="headerlink" title="Binary search tree Delete pseudo code"></a>Binary search tree Delete pseudo code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TREE-DELETE(T, z)  </span><br><span class="line">  <span class="keyword">if</span> left[z] = NIL <span class="keyword">or</span> right[z] = NIL  </span><br><span class="line">      then y ← z  </span><br><span class="line">      <span class="keyword">else</span> y ← TREE-SUCCESSOR(z)  </span><br><span class="line">  <span class="keyword">if</span> left[y] ≠ NIL  </span><br><span class="line">      then x ← left[y]  </span><br><span class="line">      <span class="keyword">else</span> x ← right[y]  </span><br><span class="line">  <span class="keyword">if</span> x ≠ NIL  </span><br><span class="line">      then p[x] ← p[y]  </span><br><span class="line">  <span class="keyword">if</span> p[y] = NIL  </span><br><span class="line">      then root[T] ← x  </span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> y = left[p[y]]  </span><br><span class="line">              then left[p[y]] ← x  </span><br><span class="line">              <span class="keyword">else</span> right[p[y]] ← x  </span><br><span class="line">  <span class="keyword">if</span> y ≠ z  </span><br><span class="line">      then key[z] ← key[y]  </span><br><span class="line">           copy y's satellite data into z  </span><br><span class="line">  <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure></p>
             <p class="article-more-link">
-                <a href="/2018/03/02/RedBlackTree-III/#more">자세히 보기</a>
+                <a href="/2018/03/02/RedBlackTree-III/#more">Read More</a>
             </p>
         
         </div>
@@ -1657,7 +1658,7 @@
 
 </div>
 
-    <a data-url="http://HuCoco.com/2018/03/02/RedBlackTree-III/" data-id="cjjmv084k000yj0b9e2vafktv" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://HuCoco.com/2018/03/02/RedBlackTree-III/" data-id="cjmyp36u9000ussb9mfuznqcg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1734,7 +1735,7 @@
 
 
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 이전</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">다음 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
 </section>
             
@@ -1743,7 +1744,7 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">최근 글</h3>
+        <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="">
                 
@@ -1849,7 +1850,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">카테고리</h3>
+        <h3 class="widget-title">categories</h3>
         <div class="widget">
             <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Problems/">Problems</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Search/">Search</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Sort/">Sort</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/">Data Structure</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Graph/">Graph</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Structure/Tree/">Tree</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/">Graphics</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/PBR/">PBR</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphics/Ray-Tracing/">Ray Tracing</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/">SIMD</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/SIMD/SSE/">SSE</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
@@ -1858,7 +1859,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">아카이브</h3>
+        <h3 class="widget-title">archives</h3>
         <div class="widget">
             <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">12</span></li></ul>
         </div>
@@ -1867,7 +1868,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">태그</h3>
+        <h3 class="widget-title">tags</h3>
         <div class="widget">
             <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/">Data Structure</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/">Graph</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/">Graphics</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PBR/">PBR</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ray-Tracing/">Ray Tracing</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SIMD/">SIMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sort/">Sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/">Tree</a><span class="tag-list-count">3</span></li></ul>
         </div>
@@ -1876,7 +1877,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">태그 클라우드</h3>
+        <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
             <a href="/tags/Algorithm/" style="font-size: 15px;">Algorithm</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Data-Structure/" style="font-size: 16.67px;">Data Structure</a> <a href="/tags/Graph/" style="font-size: 16.67px;">Graph</a> <a href="/tags/Graphics/" style="font-size: 18.33px;">Graphics</a> <a href="/tags/PBR/" style="font-size: 13.33px;">PBR</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ray-Tracing/" style="font-size: 16.67px;">Ray Tracing</a> <a href="/tags/SIMD/" style="font-size: 10px;">SIMD</a> <a href="/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/Tree/" style="font-size: 11.67px;">Tree</a>
         </div>
@@ -1885,7 +1886,7 @@
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">링크</h3>
+        <h3 class="widget-title">links</h3>
         <div class="widget">
             <ul>
                 
